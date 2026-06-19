@@ -1,0 +1,96 @@
+重要：此提示词可能运行在非交互环境中。
+
+非交互规则：
+- 不要使用 AskUserQuestion 或任何交互式确认工具。
+- 当出现可选分支时，直接选择合理默认值，并在结果里记录假设。
+- 跳过可选确认，直接执行。
+
+任务：在选定的 CodeRef Vault 中完成一次结构化代码调研。
+
+执行上下文：
+- 工作目录：`{{projectPath}}`
+{{#if repositoryPath}}- 解析后的目标路径：`{{repositoryPath}}`{{/if}}
+{{#if targetType}}- 目标类型：`{{targetType}}`{{/if}}
+{{#if outputVaultId}}- 输出 Vault ID：`{{outputVaultId}}`{{/if}}
+{{#if outputVaultName}}- 输出 Vault 名称：`{{outputVaultName}}`{{/if}}
+{{#if outputVaultType}}- 输出 Vault 类型：`{{outputVaultType}}`{{/if}}
+{{#if reposDirectory}}- 仓库工作区：`{{reposDirectory}}`{{/if}}
+{{#if docsDirectory}}- 文档输出区：`{{docsDirectory}}`{{/if}}
+- 调研方向：`{{{researchDirection}}}`
+
+{{#if repositoryUrls}}
+按顺序提供的仓库输入：
+{{#each repositoryUrls}}
+- `{{this}}`
+{{/each}}
+{{else}}
+本次没有提供外部仓库 URL，请直接分析当前 CodeRef Vault 内已经存在的内容。
+{{/if}}
+
+{{#if referenceVaults}}
+参考 Vault（只读证据来源）：
+{{#each referenceVaults}}
+- `{{name}}`（ID：`{{id}}`，类型：`{{type}}`，路径：`{{physicalPath}}`）
+{{/each}}
+{{else}}
+本次没有额外参考 Vault，请只使用输出 CodeRef Vault 内已有内容以及上面的仓库输入。
+{{/if}}
+
+{{#if targetProjects}}
+项目引用：
+{{#each targetProjects}}
+- `{{name}}`（项目 ID：`{{projectId}}`，访问模式：`{{accessType}}`，路径：`{{physicalPath}}`）
+{{/each}}
+{{else}}
+本次没有额外项目引用。
+{{/if}}
+
+要求：
+1. 始终在 `{{projectPath}}` 这个输出 CodeRef Vault 根目录里工作。
+2. 仓库工作区保持在 `repos/`，最终调研成果沉淀到 `docs/`。
+3. 所有参考 Vault 都只允许作为只读证据来源，最终写入目标不能离开所选输出 CodeRef Vault。
+4. 访问模式为 `read` 的项目引用只能作为只读证据来源；访问模式为 `write` 的项目引用，只能在调研明确需要协同笔记或联动修改时才允许更新。
+5. 不要把最终交付物写到所选输出 CodeRef Vault 根目录之外。
+6. 所有结论都必须基于你实际检查到的本地证据，不能臆测仓库事实。
+7. 优先在 `docs/` 中新增或定向更新 markdown 调研文档，而不是把笔记分散到各处。
+
+必需执行流程：
+1. 校验 CodeRef Vault 结构。
+   - 确认工作目录存在且可访问。
+   - 确认 `repos/` 与 `docs/` 存在；如果缺失则补齐。
+   - 如果现有 Vault 结构不完整，要在结果中记录你的处理假设。
+2. 当提供仓库 URL 时先补齐仓库素材。
+{{#if repositoryUrls}}
+   - 对上面的每个仓库 URL，确保 `repos/` 下存在对应 checkout。
+   - 如果本地还没有对应目录，就 clone 到 `repos/`。
+   - 如果目录已存在，就检查远端并做安全更新。
+   - 不要删除 `repos/` 下与当前任务无关的其他仓库。
+{{else}}
+   - 跳过 clone / update，直接检查当前所选 CodeRef Vault 里已有的仓库或文件内容。
+{{/if}}
+3. 检查可用代码与文档。
+   - 读取最相关的清单文件、README、关键源码目录与架构文档。
+   - 围绕调研方向梳理模块边界、依赖关系、执行流、扩展点与风险。
+   - 如果涉及多个仓库，要明确它们之间的关系。
+{{#if referenceVaults}}
+   - 逐个检查所选参考 Vault 的只读内容；必要时在结论里指出关键证据来自哪个参考 Vault。
+{{/if}}
+{{#if targetProjects}}
+   - 检查每个项目引用，并严格遵守它声明的访问模式。
+   - `read` 项目只作为证据来源。
+   - `write` 项目只有在调研明确要求联动笔记或联动修改时才可作为可编辑辅助范围。
+{{/if}}
+4. 在 `docs/` 下产出调研交付物。
+   - 至少创建或更新一个 markdown 文档。
+   - 总结调研范围、关键发现、证据、风险与建议的后续动作。
+   - 文件名要能让这个主题在 Vault 中被快速识别。
+5. 在会话输出中返回简洁执行总结。
+   - 说明检查了什么、clone / update 了哪些仓库、写入了哪些文档、还有哪些限制。
+
+安全约束：
+- 不要依赖交互式认证流程。
+- 如果某个仓库无法 clone 或更新，继续利用剩余可用证据完成分析，并准确报告失败原因。
+- 不要修改参考 Vault 的内容；它们在本次任务里只提供只读上下文。
+- 不要修改被标记为 `read` 的项目引用；最终调研交付物必须留在所选输出 CodeRef Vault 内。
+- 不要大面积重写既有文档；除非任务明确要求，否则优先做增量或定向更新。
+- 所有必需输出都必须留在所选输出 CodeRef Vault 根目录内。

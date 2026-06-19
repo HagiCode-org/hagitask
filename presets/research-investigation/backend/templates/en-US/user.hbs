@@ -1,0 +1,96 @@
+IMPORTANT: This prompt may run in a non-interactive environment.
+
+Non-interactive rules:
+- Do not use AskUserQuestion or any interactive confirmation tool.
+- When an optional choice is needed, pick a reasonable default and record the assumption.
+- Skip optional confirmations and continue directly.
+
+Task: perform a structured code research investigation inside the selected CodeRef vault.
+
+Execution context:
+- Working directory: `{{projectPath}}`
+{{#if repositoryPath}}- Resolved target path: `{{repositoryPath}}`{{/if}}
+{{#if targetType}}- Target type: `{{targetType}}`{{/if}}
+{{#if outputVaultId}}- Output vault ID: `{{outputVaultId}}`{{/if}}
+{{#if outputVaultName}}- Output vault name: `{{outputVaultName}}`{{/if}}
+{{#if outputVaultType}}- Output vault type: `{{outputVaultType}}`{{/if}}
+{{#if reposDirectory}}- Repositories workspace: `{{reposDirectory}}`{{/if}}
+{{#if docsDirectory}}- Documentation output area: `{{docsDirectory}}`{{/if}}
+- Research direction: `{{{researchDirection}}}`
+
+{{#if repositoryUrls}}
+Ordered repository inputs:
+{{#each repositoryUrls}}
+- `{{this}}`
+{{/each}}
+{{else}}
+No external repository URLs were provided. Analyze the existing contents already present in the selected CodeRef vault.
+{{/if}}
+
+{{#if referenceVaults}}
+Reference vaults (read-only evidence sources):
+{{#each referenceVaults}}
+- `{{name}}` (ID: `{{id}}`, type: `{{type}}`, path: `{{physicalPath}}`)
+{{/each}}
+{{else}}
+No additional reference vaults were selected. Use only the output CodeRef vault contents and any repository inputs above.
+{{/if}}
+
+{{#if targetProjects}}
+Project references:
+{{#each targetProjects}}
+- `{{name}}` (project ID: `{{projectId}}`, access: `{{accessType}}`, path: `{{physicalPath}}`)
+{{/each}}
+{{else}}
+No additional project references were selected.
+{{/if}}
+
+Requirements:
+1. Work inside `{{projectPath}}`, which is the selected output CodeRef vault root.
+2. Keep repository workspace material under `repos/` and research deliverables under `docs/`.
+3. Treat every reference vault as read-only evidence context. Never switch the final write target away from the selected output CodeRef vault.
+4. Treat project references with `read` access as read-only evidence. Project references with `write` access may be updated only when the investigation explicitly requires coordinated notes or changes.
+5. Do not write final deliverables outside the selected output CodeRef vault root.
+6. Base every conclusion on inspected local evidence. Do not invent repository facts.
+7. Prefer updating or creating concise markdown research deliverables in `docs/` rather than scattering notes across the vault.
+
+Required runtime workflow:
+1. Validate the CodeRef vault layout.
+   - Confirm the working directory exists and is accessible.
+   - Confirm `repos/` and `docs/` exist; create them if they are missing.
+   - Record any assumptions if the existing vault layout is incomplete.
+2. Acquire repository material when URLs are provided.
+{{#if repositoryUrls}}
+   - For each repository URL above, ensure a corresponding checkout exists under `repos/`.
+   - If the repository directory does not exist yet, clone it into `repos/`.
+   - If the repository directory already exists, inspect its remotes and update it safely.
+   - Do not delete unrelated repositories already present in `repos/`.
+{{else}}
+   - Skip clone/update work and inspect the repositories or files already available in the selected CodeRef vault.
+{{/if}}
+3. Inspect the available code and documentation.
+   - Read the most relevant manifests, README files, key source directories, and architecture notes.
+   - Trace the modules, dependencies, flows, and risk areas needed to answer the research direction.
+   - If multiple repositories are involved, identify how they relate to each other.
+{{#if referenceVaults}}
+   - Review each selected reference vault as read-only supporting evidence and cite which vault informed each key conclusion when it matters.
+{{/if}}
+{{#if targetProjects}}
+   - Review each selected project reference and respect its declared access mode.
+   - Use `read` projects as evidence-only scope.
+   - Use `write` projects as editable auxiliary scope only when coordinated changes or notes are required by the investigation.
+{{/if}}
+4. Produce research deliverables under `docs/`.
+   - Create or update at least one markdown deliverable in `docs/`.
+   - Summarize the investigated scope, findings, evidence, risks, and recommended follow-up actions.
+   - Use filenames that make the topic discoverable from the vault.
+5. Return a short execution summary in the session output.
+   - Include what was inspected, which repositories were cloned or updated, what documents were written, and any limitations.
+
+Safety constraints:
+- Do not rely on interactive authentication flows.
+- If a repository cannot be cloned or updated, continue with the remaining available evidence and report the exact failure.
+- Do not modify reference vault contents. They are read-only context for this run.
+- Do not modify project references that are marked `read`. Keep final research deliverables in the selected output CodeRef vault.
+- Do not rewrite large existing docs unless the research task truly requires it; prefer additive or targeted updates.
+- Keep all required output inside the selected output CodeRef vault root.

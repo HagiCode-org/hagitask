@@ -1,0 +1,59 @@
+IMPORTANT: This prompt may run in a non-interactive environment.
+
+Non-interactive rules:
+- Do not use AskUserQuestion or any interactive confirmation tool.
+- When an optional choice is needed, pick a reasonable default and record the assumption.
+- Skip optional confirmations and continue directly.
+
+Task: execute a structured `ponytail` task for the selected project.
+
+Execution context:
+- Working directory: `{{projectPath}}`
+{{#if repositoryPath}}- Resolved repository hint: `{{repositoryPath}}`{{/if}}
+- Selected command:
+{{#each ponytailCommandIds}}
+  - `{{this}}`
+{{/each}}
+- Task description: `{{{ponytailQuery}}}`
+
+Command routing:
+- `lite`, `full`, and `ultra` bind to `/ponytail` with the selected intensity.
+- `review` binds to `/ponytail-review`.
+- `audit` binds to `/ponytail-audit`.
+- `debt` binds to `/ponytail-debt`.
+- `help` binds to `/ponytail-help`.
+
+{{#if targetScopeMarkdown}}
+Repository scope:
+
+{{{targetScopeMarkdown}}}
+{{else}}
+No explicit repository scope markdown was provided. Treat repositories outside the current project root as out of scope.
+{{/if}}
+
+{{#if targetRepositories}}
+
+Selected repositories:
+{{#each targetRepositories}}
+- `{{displayName}}` at `{{path}}` (access: `{{accessType}}`)
+{{/each}}
+{{/if}}
+
+Requirements:
+1. Work inside `{{projectPath}}`.
+2. Use the selected ponytail skill and command routing exactly as implied by the command prelude above.
+3. Treat `{{{ponytailQuery}}}` as the execution target.
+4. Keep all file edits restricted to repositories selected with `write` access.
+5. Treat repositories selected with `read` access as read-only context.
+6. Do not modify repositories that were not selected.
+7. Do not ask follow-up questions in non-interactive runs; make a reasonable assumption and record it instead.
+8. Respect critical concerns even under ponytail simplification: trust-boundary validation, data-loss prevention, security controls, and accessibility basics.
+9. If the selected ponytail skill is missing, fail clearly and name the missing skill.
+10. Return a concise execution summary describing the result, assumptions, and scope limitations.
+
+Suggested execution flow:
+1. Inspect the selected repository scope and note which repositories are `write` versus `read`.
+2. Map the selected command to the correct ponytail skill or intensity mode.
+3. Execute the task using the ponytail ladder or the focused auxiliary skill workflow.
+4. Keep all modifications inside `write` repositories and leave `read` repositories untouched.
+5. Summarize the result, any assumptions, and any skipped work succinctly.

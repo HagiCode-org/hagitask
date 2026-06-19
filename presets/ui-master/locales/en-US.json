@@ -1,0 +1,72 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "UI Master",
+    "title": "Create UI Master Task",
+    "description": "Queue a structured UI Master task preset with grouped commands, repository scope, and scene defaults.",
+    "defaultTitle": "New UI Master Task",
+    "submit": "Create UI Master Task",
+    "submitting": "Queueing UI Master task..."
+  },
+  "scene": {
+    "uiMasterDefault": {
+      "title": "UI Master Default",
+      "summary": "Default scene registration for UI Master dispatch and captain routing."
+    }
+  },
+  "panel": {
+    "projectLabel": "Project *",
+    "projectHint": "The UI Master task will be created in the selected project.",
+    "taskNameLabel": "Task name",
+    "taskNameHint": "Optional. Leave empty to let the title be optimized asynchronously after dispatch.",
+    "taskNamePlaceholder": "Refine homepage hero section",
+    "repositoryAccessLabel": "Target repositories",
+    "repositoryAccessHint": "Choose repositories from the selected project and assign read or write access per repository.",
+    "repositoryAccessEmpty": "No repositories are available for the selected project yet.",
+    "commandLabel": "Impeccable commands *",
+    "commandHint": "Keep the original English command labels and use localized tooltip copy for intent.",
+    "detailLabel": "UI adjustment brief *",
+    "detailHint": "Describe the intended UI outcome, constraints, and tradeoffs you care about.",
+    "detailPlaceholder": "Tighten hierarchy, soften background noise, strengthen CTA contrast, and improve mobile spacing.",
+    "referenceVaultsLabel": "Reference vaults",
+    "referenceVaultsHint": "Optionally attach vaults as read-only reference context for assets, docs, snippets, or prior explorations.",
+    "projectReferencesLabel": "Project references",
+    "projectReferencesHint": "Optionally attach other projects as read-only context when this UI work depends on shared patterns or adjacent implementations."
+  },
+  "commands": {
+    "groups": {
+      "build": "Build",
+      "evaluate": "Evaluate",
+      "refine": "Refine",
+      "enhance": "Enhance",
+      "fix": "Fix",
+      "iterate": "Iterate"
+    },
+    "items": {
+      "craft": { "description": "Create a fresh interface or component direction with strong initial structure." },
+      "impeccable": { "description": "Run the core UI Master flow for ambitious interface polish and UX shaping." },
+      "shape": { "description": "Shape layout and hierarchy for a new or substantially reworked UI concept." },
+      "audit": { "description": "Evaluate the current interface for UX, accessibility, hierarchy, and friction." },
+      "critique": { "description": "Critique the current UI and explain what is not working clearly." },
+      "animate": { "description": "Add purposeful motion and transitions that improve clarity and delight." },
+      "bolder": { "description": "Push the interface toward stronger contrast, emphasis, and clearer visual confidence." },
+      "colorize": { "description": "Rework color usage, accents, and mood while keeping the UI coherent." },
+      "delight": { "description": "Add more fun, charm, and memorable moments without hurting usability." },
+      "layout": { "description": "Rework spacing, composition, and structural layout decisions." },
+      "overdrive": { "description": "Explore a more ambitious, high-energy UI direction." },
+      "quieter": { "description": "Reduce noise, calm the layout, and make the interface feel more controlled." },
+      "typeset": { "description": "Improve typography, line length, scale, and text rhythm." },
+      "adapt": { "description": "Adapt the UI to a different surface, context, or product goal." },
+      "clarify": { "description": "Simplify confusing elements so the interface becomes easier to parse quickly." },
+      "distill": { "description": "Strip the UI down to the essential signals and decisions." },
+      "harden": { "description": "Strengthen resilience, states, and implementation-readiness for production use." },
+      "onboard": { "description": "Improve first-run understanding, empty states, and guided setup moments." },
+      "optimize": { "description": "Optimize performance, responsiveness, and interaction efficiency." },
+      "polish": { "description": "Refine the UI for a sharper, more finished production feel." },
+      "document": { "description": "Extract reusable interface guidance, tokens, or documentation-ready decisions." },
+      "extract": { "description": "Pull design patterns or reusable components out of the current UI." },
+      "live": { "description": "Tune the interface for live iteration in an actively running surface." },
+      "teach": { "description": "Make the UI easier for collaborators to understand and extend." }
+    }
+  }
+}

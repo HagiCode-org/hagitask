@@ -1,0 +1,97 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/commands.schema.json",
+  "schemaVersion": "1.1",
+  "selectionMode": "single",
+  "groups": [
+    {
+      "id": "intensity",
+      "title": {
+        "key": "commands.groups.intensity"
+      }
+    },
+    {
+      "id": "review",
+      "title": {
+        "key": "commands.groups.review"
+      }
+    },
+    {
+      "id": "tools",
+      "title": {
+        "key": "commands.groups.tools"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "full",
+      "groupId": "intensity",
+      "label": "full",
+      "skill": "ponytail",
+      "description": {
+        "key": "commands.items.full.description"
+      },
+      "preludeTemplate": "{commandId} {ponytailQuery}"
+    },
+    {
+      "id": "lite",
+      "groupId": "intensity",
+      "label": "lite",
+      "skill": "ponytail",
+      "description": {
+        "key": "commands.items.lite.description"
+      },
+      "preludeTemplate": "{commandId} {ponytailQuery}"
+    },
+    {
+      "id": "ultra",
+      "groupId": "intensity",
+      "label": "ultra",
+      "skill": "ponytail",
+      "description": {
+        "key": "commands.items.ultra.description"
+      },
+      "preludeTemplate": "{commandId} {ponytailQuery}"
+    },
+    {
+      "id": "review",
+      "groupId": "review",
+      "label": "review",
+      "skill": "ponytail-review",
+      "description": {
+        "key": "commands.items.review.description"
+      },
+      "preludeTemplate": "{ponytailQuery}"
+    },
+    {
+      "id": "audit",
+      "groupId": "tools",
+      "label": "audit",
+      "skill": "ponytail-audit",
+      "description": {
+        "key": "commands.items.audit.description"
+      },
+      "preludeTemplate": "{ponytailQuery}"
+    },
+    {
+      "id": "debt",
+      "groupId": "tools",
+      "label": "debt",
+      "skill": "ponytail-debt",
+      "description": {
+        "key": "commands.items.debt.description"
+      },
+      "preludeTemplate": "{ponytailQuery}"
+    },
+    {
+      "id": "help",
+      "groupId": "tools",
+      "label": "help",
+      "skill": "ponytail-help",
+      "description": {
+        "key": "commands.items.help.description"
+      },
+      "preludeTemplate": "{ponytailQuery}"
+    }
+  ]
+}

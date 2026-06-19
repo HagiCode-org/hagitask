@@ -1,0 +1,51 @@
+{
+  "$schema": "../../schemas/task-preset-plugin/manifest.schema.json",
+  "schemaVersion": "1.0",
+  "taskPresetId": "ui-master",
+  "version": "1.0.0",
+  "icon": "palette",
+  "displayName": {
+    "key": "taskPreset.displayName"
+  },
+  "description": {
+    "key": "taskPreset.description"
+  },
+  "kind": "custom-executor",
+  "status": "experimental",
+  "owner": "PCode Team",
+  "entrypoints": {
+    "menuSurface": "session-create",
+    "drawerId": "ui-master"
+  },
+  "activation": {
+    "defaultState": "passive"
+  },
+  "localization": {
+    "strategy": "plugin-bundles",
+    "namespace": "ui-master",
+    "defaultLocale": "en-US",
+    "supportedLocales": [
+      "en-US",
+      "zh-CN"
+    ],
+    "bundles": {
+      "en-US": "./locales/en-US.json",
+      "zh-CN": "./locales/zh-CN.json"
+    }
+  },
+  "capabilities": {
+    "supportsSceneBinding": true,
+    "supportsCommandCatalog": true
+  },
+  "ui": {
+    "panel": "./frontend/panel.json",
+    "commands": "./frontend/commands.json"
+  },
+  "site": {
+    "storePage": "./store-page/"
+  },
+  "backend": {
+    "taskPreset": "./backend/task-preset.json",
+    "prompts": "./backend/prompts.json"
+  }
+}

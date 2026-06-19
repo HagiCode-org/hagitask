@@ -1,0 +1,105 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/panel.schema.json",
+  "surface": "drawer",
+  "title": {
+    "key": "taskPreset.title"
+  },
+  "description": {
+    "key": "taskPreset.description"
+  },
+  "defaultTitle": {
+    "key": "taskPreset.defaultTitle"
+  },
+  "submitLabel": {
+    "key": "taskPreset.submit"
+  },
+  "submittingLabel": {
+    "key": "taskPreset.submitting"
+  },
+  "sections": [
+    {
+      "id": "context",
+      "layout": "split",
+      "fields": [
+        {
+          "id": "projectId",
+          "renderer": "project-picker",
+          "label": {
+            "key": "panel.projectLabel"
+          },
+          "hint": {
+            "key": "panel.projectHint"
+          },
+          "required": true,
+          "output": "projectId"
+        },
+        {
+          "id": "title",
+          "renderer": "text",
+          "label": {
+            "key": "panel.taskNameLabel"
+          },
+          "hint": {
+            "key": "panel.taskNameHint"
+          },
+          "placeholder": {
+            "key": "panel.taskNamePlaceholder"
+          },
+          "output": "title"
+        },
+        {
+          "id": "targetRepositories",
+          "renderer": "repository-access-selector",
+          "label": {
+            "key": "panel.repositoryAccessLabel"
+          },
+          "hint": {
+            "key": "panel.repositoryAccessHint"
+          },
+          "output": "targetRepositories",
+          "selectionMode": "multiple",
+          "componentProps": {
+            "targetSelectionId": "targetRepositories",
+            "emptyTextKey": "panel.repositoryAccessEmpty"
+          }
+        }
+      ]
+    },
+    {
+      "id": "research-task",
+      "layout": "stack",
+      "fields": [
+        {
+          "id": "last30daysMode",
+          "renderer": "command-picker",
+          "label": {
+            "key": "panel.commandLabel"
+          },
+          "hint": {
+            "key": "panel.commandHint"
+          },
+          "required": true,
+          "output": "last30daysMode",
+          "selectionMode": "single",
+          "dataSource": "./commands.json"
+        },
+        {
+          "id": "last30daysQuery",
+          "renderer": "multiline-text",
+          "inputType": "haginput",
+          "label": {
+            "key": "panel.queryLabel"
+          },
+          "hint": {
+            "key": "panel.queryHint"
+          },
+          "placeholder": {
+            "key": "panel.queryPlaceholder"
+          },
+          "required": true,
+          "output": "last30daysQuery"
+        }
+      ]
+    }
+  ]
+}

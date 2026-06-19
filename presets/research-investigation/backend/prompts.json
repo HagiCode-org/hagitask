@@ -1,0 +1,103 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/prompt-package.schema.json",
+  "version": "1.0.0",
+  "templateEngine": "handlebars",
+  "defaultLocale": "en-US",
+  "supportedLocales": [
+    "en-US",
+    "zh-CN"
+  ],
+  "inputs": [
+    {
+      "name": "projectPath",
+      "source": "system",
+      "required": true,
+      "description": "Absolute path to the selected output CodeRef vault root."
+    },
+    {
+      "name": "repositoryPath",
+      "source": "computed-context",
+      "description": "Resolved repository identity hint for the selected target."
+    },
+    {
+      "name": "targetType",
+      "source": "computed-context",
+      "description": "Resolved execution target type."
+    },
+    {
+      "name": "vaultId",
+      "source": "computed-context",
+      "description": "Resolved output vault id alias kept for compatibility."
+    },
+    {
+      "name": "vaultName",
+      "source": "computed-context",
+      "description": "Resolved output vault name alias kept for compatibility."
+    },
+    {
+      "name": "vaultType",
+      "source": "computed-context",
+      "description": "Resolved output vault type alias kept for compatibility."
+    },
+    {
+      "name": "outputVaultId",
+      "source": "computed-context",
+      "description": "Selected output CodeRef vault id."
+    },
+    {
+      "name": "outputVaultName",
+      "source": "computed-context",
+      "description": "Selected output CodeRef vault name."
+    },
+    {
+      "name": "outputVaultType",
+      "source": "computed-context",
+      "description": "Selected output CodeRef vault type."
+    },
+    {
+      "name": "researchDirection",
+      "source": "task-preset-input",
+      "required": true,
+      "description": "Structured investigation direction entered by the user."
+    },
+    {
+      "name": "repositoryUrls",
+      "source": "task-preset-input",
+      "description": "Optional ordered Git repository URLs that should be cloned or updated under repos/."
+    },
+    {
+      "name": "referenceVaults",
+      "source": "computed-context",
+      "description": "Optional read-only reference vault summaries resolved from the preset selection."
+    },
+    {
+      "name": "targetProjects",
+      "source": "computed-context",
+      "description": "Optional normalized project references with read or write access semantics."
+    },
+    {
+      "name": "reposDirectory",
+      "source": "computed-context",
+      "description": "Absolute path to the selected output vault repos/ workspace."
+    },
+    {
+      "name": "docsDirectory",
+      "source": "computed-context",
+      "description": "Absolute path to the selected output vault docs/ area."
+    }
+  ],
+  "rendering": {
+    "strictVariables": false,
+    "trimBlocks": true
+  },
+  "locales": {
+    "en-US": {
+      "systemTemplate": "./templates/en-US/system.md",
+      "userTemplate": "./templates/en-US/user.hbs"
+    },
+    "zh-CN": {
+      "systemTemplate": "./templates/zh-CN/system.md",
+      "userTemplate": "./templates/zh-CN/user.hbs"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/prompt-package.schema.json",
+  "version": "1.0.0",
+  "templateEngine": "handlebars",
+  "defaultLocale": "en-US",
+  "supportedLocales": [
+    "en-US",
+    "zh-CN"
+  ],
+  "inputs": [
+    {
+      "name": "projectPath",
+      "source": "system",
+      "required": true,
+      "description": "Absolute path to the selected project root."
+    },
+    {
+      "name": "repositoryPath",
+      "source": "computed-context",
+      "description": "Resolved repository identity hint for the selected project."
+    },
+    {
+      "name": "ponytailCommandIds",
+      "source": "task-preset-input",
+      "required": true,
+      "description": "Selected ponytail command id that determines the bound skill and intensity."
+    },
+    {
+      "name": "ponytailQuery",
+      "source": "task-preset-input",
+      "required": true,
+      "description": "Task description, code target, audit scope, or help request entered by the user."
+    },
+    {
+      "name": "targetScopeMarkdown",
+      "source": "task-preset-input",
+      "required": true,
+      "description": "Frontend-composed markdown scope block built from selected repositories and their access labels."
+    },
+    {
+      "name": "targetRepositories",
+      "source": "computed-context",
+      "description": "Selected repositories and their access types."
+    }
+  ],
+  "rendering": {
+    "strictVariables": false,
+    "trimBlocks": true
+  },
+  "locales": {
+    "en-US": {
+      "systemTemplate": "./templates/en-US/system.md",
+      "userTemplate": "./templates/en-US/user.hbs"
+    },
+    "zh-CN": {
+      "systemTemplate": "./templates/zh-CN/system.md",
+      "userTemplate": "./templates/zh-CN/user.hbs"
+    }
+  }
+}

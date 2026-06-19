@@ -1,0 +1,46 @@
+{
+  "$schema": "../../schemas/task-preset-plugin/manifest.schema.json",
+  "schemaVersion": "1.0",
+  "taskPresetId": "normal-session",
+  "version": "1.0.0",
+  "icon": "message-circle",
+  "displayName": {
+    "key": "taskPreset.displayName"
+  },
+  "description": {
+    "key": "taskPreset.description"
+  },
+  "kind": "custom-executor",
+  "status": "experimental",
+  "owner": "PCode Team",
+  "entrypoints": {
+    "menuSurface": "session-create",
+    "drawerId": "normal-session"
+  },
+  "activation": {
+    "defaultState": "passive"
+  },
+  "localization": {
+    "strategy": "plugin-bundles",
+    "namespace": "normal-session",
+    "defaultLocale": "en-US",
+    "supportedLocales": [
+      "en-US",
+      "zh-CN"
+    ],
+    "bundles": {
+      "en-US": "./locales/en-US.json",
+      "zh-CN": "./locales/zh-CN.json"
+    }
+  },
+  "ui": {
+    "panel": "./frontend/panel.json"
+  },
+  "site": {
+    "storePage": "./store-page/"
+  },
+  "backend": {
+    "taskPreset": "./backend/task-preset.json",
+    "prompts": "./backend/prompts.json"
+  }
+}

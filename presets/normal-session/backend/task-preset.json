@@ -1,0 +1,47 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/task-preset.schema.json",
+  "taskKey": "normalSession",
+  "scriptKey": "preset.normal-session",
+  "defaultTargetType": "repository",
+  "requirements": [],
+  "targets": {
+    "repositories": {
+      "enabled": true,
+      "selections": [
+        {
+          "id": "targetRepositories",
+          "selectionMode": "multiple",
+          "allowedAccessTypes": [
+            "read",
+            "write"
+          ],
+          "output": "targetRepositories",
+          "required": false,
+          "scope": {
+            "source": "owner-project-repositories"
+          }
+        }
+      ]
+    },
+    "vaults": {
+      "enabled": false
+    },
+    "projects": {
+      "enabled": false
+    }
+  },
+  "inputBindings": [
+    {
+      "input": "normalSessionInput",
+      "promptParameter": "normalSessionInput",
+      "metadataKey": "normalSessionInput",
+      "required": true
+    },
+    {
+      "input": "targetScopeMarkdown",
+      "promptParameter": "targetScopeMarkdown",
+      "metadataKey": "targetScopeMarkdown",
+      "producer": "frontend-computed"
+    }
+  ]
+}

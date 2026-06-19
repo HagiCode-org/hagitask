@@ -1,0 +1,67 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/commands.schema.json",
+  "schemaVersion": "1.1",
+  "selectionMode": "single",
+  "groups": [
+    {
+      "id": "research",
+      "title": {
+        "key": "commands.groups.research"
+      }
+    },
+    {
+      "id": "discovery",
+      "title": {
+        "key": "commands.groups.discovery"
+      }
+    },
+    {
+      "id": "applied",
+      "title": {
+        "key": "commands.groups.applied"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "general",
+      "groupId": "research",
+      "label": "general",
+      "skill": "last30days",
+      "description": {
+        "key": "commands.items.general.description"
+      },
+      "preludeTemplate": "/last30days {last30daysQuery}"
+    },
+    {
+      "id": "comparison",
+      "groupId": "research",
+      "label": "comparison",
+      "skill": "last30days",
+      "description": {
+        "key": "commands.items.comparison.description"
+      },
+      "preludeTemplate": "/last30days {last30daysQuery}"
+    },
+    {
+      "id": "competitors",
+      "groupId": "discovery",
+      "label": "competitors",
+      "skill": "last30days",
+      "description": {
+        "key": "commands.items.competitors.description"
+      },
+      "preludeTemplate": "/last30days {last30daysQuery} --competitors"
+    },
+    {
+      "id": "prompting",
+      "groupId": "applied",
+      "label": "prompting",
+      "skill": "last30days",
+      "description": {
+        "key": "commands.items.prompting.description"
+      },
+      "preludeTemplate": "/last30days {last30daysQuery}"
+    }
+  ]
+}

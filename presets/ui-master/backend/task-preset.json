@@ -1,0 +1,84 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/task-preset.schema.json",
+  "taskKey": "uiMaster",
+  "scriptKey": "autotask.ui-master",
+  "defaultTargetType": "repository",
+  "scene": {
+    "provider": "hero-ui-master-scene",
+    "defaultSceneKey": "ui-master-default",
+    "registrations": [
+      {
+        "sceneKey": "ui-master-default",
+        "titleKey": "scene.uiMasterDefault.title",
+        "summaryKey": "scene.uiMasterDefault.summary"
+      }
+    ]
+  },
+  "requirements": [
+    {
+      "type": "skills",
+      "name": "impeccable"
+    },
+    {
+      "type": "cli",
+      "name": "impeccable",
+      "command": "npm",
+      "args": [
+        "exec",
+        "--offline",
+        "--",
+        "impeccable",
+        "--help"
+      ]
+    }
+  ],
+  "targets": {
+    "repositories": {
+      "enabled": true,
+      "selections": [
+        {
+          "id": "targetRepositories",
+          "selectionMode": "multiple",
+          "allowedAccessTypes": [
+            "read",
+            "write"
+          ],
+          "output": "targetRepositories",
+          "scope": {
+            "source": "owner-project-repositories"
+          }
+        }
+      ]
+    },
+    "vaults": {
+      "enabled": false
+    },
+    "projects": {
+      "enabled": false
+    }
+  },
+  "inputBindings": [
+    {
+      "input": "uiMasterDescription",
+      "promptParameter": "uiMasterDescription",
+      "metadataKey": "autoTaskUiMasterDescription",
+      "required": true
+    },
+    {
+      "input": "uiMasterCommandIds",
+      "promptParameter": "uiMasterCommandIds",
+      "metadataKey": "autoTaskUiMasterCommandIds",
+      "required": true
+    },
+    {
+      "input": "sceneKey",
+      "promptParameter": "sceneKey",
+      "metadataKey": "autoTaskSceneKey"
+    },
+    {
+      "input": "targetScopeMarkdown",
+      "promptParameter": "targetScopeMarkdown",
+      "producer": "frontend-computed"
+    }
+  ]
+}

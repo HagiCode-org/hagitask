@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "last30days",
+    "title": "创建 last30days 任务",
+    "description": "提交一个结构化的 last30days 研究 task preset，统一承载模式感知的查询塑形和明确的仓库范围。",
+    "defaultTitle": "新的 last30days 任务",
+    "submit": "创建 last30days 任务",
+    "submitting": "正在提交 last30days 任务..."
+  },
+  "panel": {
+    "projectLabel": "项目 *",
+    "projectHint": "last30days 任务会在所选项目中创建。",
+    "taskNameLabel": "任务名",
+    "taskNameHint": "可选。不填时可在派发后异步优化标题。",
+    "taskNamePlaceholder": "研究 OpenAI 与 Anthropic 的近期口碑差异",
+    "repositoryAccessLabel": "目标仓库",
+    "repositoryAccessHint": "从所选项目中选择仓库，并逐项分配 read 或 write 权限。",
+    "repositoryAccessEmpty": "当前所选项目还没有可用仓库。",
+    "commandLabel": "研究模式 *",
+    "commandHint": "选择最符合 last30days skill 查询塑形方式的模式。",
+    "queryLabel": "查询 *",
+    "queryHint": "输入研究主题，并把你希望保留的额外 framing 一起写进去，比如 `A vs B` 对比形式或这次研究要服务的决策。",
+    "queryPlaceholder": "OpenAI vs Anthropic\n比较价格、开发者情绪和发布势能，并把结论回连到我们的 preset-task 设计。"
+  },
+  "commands": {
+    "groups": {
+      "research": "研究",
+      "discovery": "发现",
+      "applied": "应用"
+    },
+    "items": {
+      "general": { "description": "按输入主题直接研究，并总结最近 30 天的主要信号。" },
+      "comparison": { "description": "当查询是 `A vs B` 形式时，直接比较其中的对象。" },
+      "competitors": { "description": "从种子主题出发，挖掘相邻竞品、替代方案和可替换产品。" },
+      "prompting": { "description": "聚焦用户想要什么、会如何提需求，以及他们在这个领域抱怨什么。" }
+    }
+  }
+}

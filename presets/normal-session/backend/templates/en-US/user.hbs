@@ -1,0 +1,54 @@
+IMPORTANT: This prompt is running in a non-interactive environment.
+
+Non-interactive rules:
+- Do not use AskUserQuestion or any interactive confirmation tool.
+- Do not require extra skills configuration for this session.
+- Do not require extra CLI arguments for this session.
+- When details are missing but not critical, make a reasonable assumption from the provided scope and record that assumption in the response.
+
+Task: start a normal chat session using the provided scope and user input below.
+
+Execution context:
+- Working directory: `{{projectPath}}`
+{{#if repositoryPath}}- Resolved repository hint: `{{repositoryPath}}`
+{{/if}}
+
+{{#if targetScopeMarkdown}}
+Repository scope:
+
+{{{targetScopeMarkdown}}}
+{{else}}
+Repository scope: no explicit repository selections were provided.
+{{/if}}
+
+{{#if referenceVaults}}
+Reference vaults:
+{{#each referenceVaults}}
+- `{{name}}` (`{{type}}`) at `{{physicalPath}}`
+{{/each}}
+{{else}}
+Reference vaults: none selected.
+{{/if}}
+
+{{#if targetProjects}}
+Project references:
+{{#each targetProjects}}
+- `{{name}}` at `{{physicalPath}}` (access: `{{accessType}}`)
+{{/each}}
+{{else}}
+Project references: none selected.
+{{/if}}
+
+User input:
+
+{{{normalSessionInput}}}
+
+Requirements:
+1. Treat this as a regular chat session kickoff, not a background auto-task dispatch.
+2. Use the provided repository, vault, and project scope as the authoritative context boundary for your work.
+3. Do not claim that extra skills configuration is required.
+4. Do not claim that extra CLI parameters are required.
+5. If the scope is incomplete, make a reasonable assumption and state it explicitly instead of asking a follow-up question.
+6. Keep repository edits restricted to repositories explicitly selected with write access.
+7. Treat repositories selected with read access, reference vaults, and project references as supporting context.
+8. Return a concise response that can proceed immediately from the provided context.

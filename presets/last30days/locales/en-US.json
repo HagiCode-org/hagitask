@@ -1,0 +1,39 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "last30days",
+    "title": "Create last30days Task",
+    "description": "Queue a structured last30days research preset with mode-aware query shaping and explicit repository scope.",
+    "defaultTitle": "New last30days Task",
+    "submit": "Create last30days Task",
+    "submitting": "Queueing last30days task..."
+  },
+  "panel": {
+    "projectLabel": "Project *",
+    "projectHint": "The last30days task will be created in the selected project.",
+    "taskNameLabel": "Task name",
+    "taskNameHint": "Optional. Leave empty to let the title be optimized asynchronously after dispatch.",
+    "taskNamePlaceholder": "Research recent sentiment around OpenAI vs Anthropic",
+    "repositoryAccessLabel": "Target repositories",
+    "repositoryAccessHint": "Choose repositories from the selected project and assign read or write access per repository.",
+    "repositoryAccessEmpty": "No repositories are available for the selected project yet.",
+    "commandLabel": "Research mode *",
+    "commandHint": "Pick the mode that best matches how the last30days skill should shape the query.",
+    "queryLabel": "Query *",
+    "queryHint": "Enter the topic plus any extra framing you want the research to honor, such as an `A vs B` comparison or the decision this should inform.",
+    "queryPlaceholder": "OpenAI vs Anthropic\nCompare pricing, developer sentiment, and launch momentum, then connect the findings back to our preset-task design."
+  },
+  "commands": {
+    "groups": {
+      "research": "Research",
+      "discovery": "Discovery",
+      "applied": "Applied"
+    },
+    "items": {
+      "general": { "description": "Research the topic as entered and summarize the main signals from the last 30 days." },
+      "comparison": { "description": "Compare the entities in the query directly when the topic is in `A vs B` form." },
+      "competitors": { "description": "Start from a seed topic and surface nearby competitors, alternatives, and substitute products." },
+      "prompting": { "description": "Focus on what users want, request, or complain about in the selected topic area." }
+    }
+  }
+}

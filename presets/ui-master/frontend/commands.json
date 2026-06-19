@@ -1,0 +1,303 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/commands.schema.json",
+  "schemaVersion": "1.1",
+  "selectionMode": "single",
+  "docs": {
+    "baseUrl": "https://impeccable.hagicode.com",
+    "routeTemplate": "/{lang}/docs/{commandId}",
+    "languageResolver": "supported-language"
+  },
+  "groups": [
+    {
+      "id": "build",
+      "title": {
+        "key": "commands.groups.build"
+      }
+    },
+    {
+      "id": "evaluate",
+      "title": {
+        "key": "commands.groups.evaluate"
+      }
+    },
+    {
+      "id": "refine",
+      "title": {
+        "key": "commands.groups.refine"
+      }
+    },
+    {
+      "id": "enhance",
+      "title": {
+        "key": "commands.groups.enhance"
+      }
+    },
+    {
+      "id": "fix",
+      "title": {
+        "key": "commands.groups.fix"
+      }
+    },
+    {
+      "id": "iterate",
+      "title": {
+        "key": "commands.groups.iterate"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "craft",
+      "groupId": "build",
+      "label": "craft",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.craft.description"
+      },
+      "docsSlug": "craft",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "shape",
+      "groupId": "build",
+      "label": "shape",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.shape.description"
+      },
+      "docsSlug": "shape",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "audit",
+      "groupId": "evaluate",
+      "label": "audit",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.audit.description"
+      },
+      "docsSlug": "audit",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "critique",
+      "groupId": "evaluate",
+      "label": "critique",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.critique.description"
+      },
+      "docsSlug": "critique",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "polish",
+      "groupId": "refine",
+      "label": "polish",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.polish.description"
+      },
+      "docsSlug": "polish",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "bolder",
+      "groupId": "refine",
+      "label": "bolder",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.bolder.description"
+      },
+      "docsSlug": "bolder",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "quieter",
+      "groupId": "refine",
+      "label": "quieter",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.quieter.description"
+      },
+      "docsSlug": "quieter",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "distill",
+      "groupId": "refine",
+      "label": "distill",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.distill.description"
+      },
+      "docsSlug": "distill",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "animate",
+      "groupId": "enhance",
+      "label": "animate",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.animate.description"
+      },
+      "docsSlug": "animate",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "colorize",
+      "groupId": "enhance",
+      "label": "colorize",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.colorize.description"
+      },
+      "docsSlug": "colorize",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "typeset",
+      "groupId": "enhance",
+      "label": "typeset",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.typeset.description"
+      },
+      "docsSlug": "typeset",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "layout",
+      "groupId": "enhance",
+      "label": "layout",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.layout.description"
+      },
+      "docsSlug": "layout",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "delight",
+      "groupId": "enhance",
+      "label": "delight",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.delight.description"
+      },
+      "docsSlug": "delight",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "overdrive",
+      "groupId": "enhance",
+      "label": "overdrive",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.overdrive.description"
+      },
+      "docsSlug": "overdrive",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "clarify",
+      "groupId": "fix",
+      "label": "clarify",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.clarify.description"
+      },
+      "docsSlug": "clarify",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "adapt",
+      "groupId": "fix",
+      "label": "adapt",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.adapt.description"
+      },
+      "docsSlug": "adapt",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "onboard",
+      "groupId": "refine",
+      "label": "onboard",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.onboard.description"
+      },
+      "docsSlug": "onboard",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "optimize",
+      "groupId": "fix",
+      "label": "optimize",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.optimize.description"
+      },
+      "docsSlug": "optimize",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "harden",
+      "groupId": "refine",
+      "label": "harden",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.harden.description"
+      },
+      "docsSlug": "harden",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "document",
+      "groupId": "build",
+      "label": "document",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.document.description"
+      },
+      "docsSlug": "document",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "extract",
+      "groupId": "build",
+      "label": "extract",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.extract.description"
+      },
+      "docsSlug": "extract",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "live",
+      "groupId": "iterate",
+      "label": "live",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.live.description"
+      },
+      "docsSlug": "live",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    },
+    {
+      "id": "teach",
+      "groupId": "build",
+      "label": "teach",
+      "skill": "impeccable",
+      "description": {
+        "key": "commands.items.teach.description"
+      },
+      "docsSlug": "teach",
+      "preludeTemplate": "/impeccable {commandId} {uiMasterDescription}"
+    }
+  ]
+}

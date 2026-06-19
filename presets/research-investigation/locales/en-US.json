@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "Research Investigation",
+    "title": "Create Research Investigation Task",
+    "description": "Queue a structured CodeRef research task with an output vault, optional references, optional project scope, and repository intake.",
+    "defaultTitle": "Research Investigation",
+    "submit": "Queue Research Task",
+    "submitting": "Queueing research task..."
+  },
+  "panel": {
+    "projectLabel": "Project *",
+    "projectHint": "The research session will be created inside the selected project.",
+    "taskNameLabel": "Task name",
+    "taskNameHint": "Optional. Leave empty to use the preset default title for this queued research session.",
+    "taskNamePlaceholder": "Preset-task migration audit",
+    "vaultScopeLabel": "Vault scope *",
+    "vaultScopeHint": "Choose one CodeRef output vault and optionally attach reference vaults in the same selector.",
+    "vaultEmptyTitle": "No CodeRef vaults are available",
+    "vaultEmptyDescription": "Register a CodeRef vault first, then return here to start a research session.",
+    "vaultRequiredMessage": "Select one CodeRef Vault as the output target before starting research.",
+    "projectReferencesLabel": "Project references",
+    "projectReferencesHint": "Optionally attach other projects as read-only or editable context for this investigation.",
+    "repositoryUrlsLabel": "Git repositories",
+    "repositoryUrlsHint": "Enter one repository URL per line. Blank lines are ignored and duplicates are removed before submission.",
+    "repositoryUrlsPlaceholder": "https://github.com/org/repo-a.git\nhttps://github.com/org/repo-b.git",
+    "directionLabel": "Research direction *",
+    "directionHint": "Be explicit about the investigation goal, expected evidence, and any cross-repo concerns.",
+    "directionPlaceholder": "Focus on how the research flow should migrate into the shared preset-task architecture, including backend validation, shared drawer UX, and cleanup risk.",
+    "directionRequiredMessage": "Enter a research direction before submitting."
+  }
+}

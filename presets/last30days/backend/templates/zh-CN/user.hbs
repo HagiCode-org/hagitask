@@ -1,0 +1,58 @@
+重要：此提示词可能运行在非交互环境中。
+
+非交互规则：
+- 不要使用 AskUserQuestion 或任何交互式确认工具。
+- 当出现可选分支时，直接选择合理默认值，并在结果里记录假设。
+- 跳过可选确认，直接执行。
+
+任务：在所选项目中执行一次结构化的 `last30days` 研究任务。
+
+执行上下文：
+- 工作目录：`{{projectPath}}`
+{{#if repositoryPath}}- 解析后的仓库提示：`{{repositoryPath}}`{{/if}}
+- 已选模式：
+{{#each last30daysMode}}
+  - `{{this}}`
+{{/each}}
+- 查询：`{{{last30daysQuery}}}`
+
+模式对应的查询约束：
+- `general`：按输入主题直接研究。
+- `comparison`：保持 `A vs B` 这种对比查询形态，直接比较参与对象。
+- `competitors`：把查询当作种子主题，启用 skill 的竞品发现模式。
+- `prompting`：把重点放在用户想要什么、会怎么提需求、以及他们抱怨什么。
+
+{{#if targetScopeMarkdown}}
+仓库范围：
+
+{{{targetScopeMarkdown}}}
+{{else}}
+本次没有提供明确的仓库范围文本。把当前项目根目录之外的仓库视为超出范围。
+{{/if}}
+
+{{#if targetRepositories}}
+
+已选仓库：
+{{#each targetRepositories}}
+- `{{displayName}}` 位于 `{{path}}`（权限：`{{accessType}}`）
+{{/each}}
+{{/if}}
+
+要求：
+1. 始终在 `{{projectPath}}` 内工作。
+2. 优先使用已安装的 `/last30days` skill 作为主要研究机制。
+3. 查询塑形时必须保留所选 `last30daysMode` 的意图。
+4. 所有文件修改都必须限制在被标记为 `write` 的仓库内。
+5. 被标记为 `read` 的仓库只能作为只读上下文。
+6. 不要修改未被选中的仓库。
+7. 在非交互运行中不要追问；需要决策时直接采用合理默认值并记录假设。
+8. 在合适时把结论回连到所选仓库，以及查询里包含的额外 framing。
+9. 如果运行环境缺少 `/last30days` skill，必须明确失败原因。
+10. 最终返回简洁总结，说明发现、假设与范围限制。
+
+建议执行流程：
+1. 检查所选仓库范围，并区分哪些仓库是 `write`、哪些是 `read`。
+2. 把 `last30daysMode` 和 `last30daysQuery` 转换成合适的 `/last30days` 调用。
+3. 运行 skill 并收集最新证据。
+4. 如果查询里包含额外 framing，用它来聚焦分析或交付物。
+5. 在不修改只读仓库的前提下，把研究结论连接回所选仓库。

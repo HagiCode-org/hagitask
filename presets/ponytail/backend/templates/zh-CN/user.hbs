@@ -1,0 +1,59 @@
+重要：此提示可能运行在非交互环境中。
+
+非交互规则：
+- 不要使用 AskUserQuestion 或任何交互式确认工具。
+- 当需要在可选项之间做决定时，选择合理默认值，并记录该假设。
+- 跳过可选确认，直接继续执行。
+
+任务：在所选项目中执行结构化的 `ponytail` 任务。
+
+执行上下文：
+- 工作目录：`{{projectPath}}`
+{{#if repositoryPath}}- 解析出的仓库提示：`{{repositoryPath}}`{{/if}}
+- 已选命令：
+{{#each ponytailCommandIds}}
+  - `{{this}}`
+{{/each}}
+- 任务描述：`{{{ponytailQuery}}}`
+
+命令路由：
+- `lite`、`full`、`ultra` 绑定到带对应强度的 `/ponytail`。
+- `review` 绑定到 `/ponytail-review`。
+- `audit` 绑定到 `/ponytail-audit`。
+- `debt` 绑定到 `/ponytail-debt`。
+- `help` 绑定到 `/ponytail-help`。
+
+{{#if targetScopeMarkdown}}
+仓库范围：
+
+{{{targetScopeMarkdown}}}
+{{else}}
+没有提供明确的仓库范围 Markdown。将当前项目根目录之外的仓库视为超出范围。
+{{/if}}
+
+{{#if targetRepositories}}
+
+已选仓库：
+{{#each targetRepositories}}
+- `{{displayName}}`，路径 `{{path}}`（权限：`{{accessType}}`）
+{{/each}}
+{{/if}}
+
+要求：
+1. 在 `{{projectPath}}` 内工作。
+2. 严格按照上方命令前导语所隐含的 ponytail 技能和命令路由执行。
+3. 把 `{{{ponytailQuery}}}` 视为本次执行目标。
+4. 所有文件修改都只能发生在被选为 `write` 的仓库中。
+5. 被选为 `read` 的仓库只能作为只读上下文。
+6. 不要修改任何未被选择的仓库。
+7. 在非交互运行中不要追问；请做出合理假设并记录下来。
+8. 即使采用 ponytail 的简化策略，也不能省略关键事项：信任边界校验、避免数据丢失的错误处理、安全控制和基础可访问性。
+9. 如果所选 ponytail 技能缺失，要明确失败并点名缺失的技能。
+10. 返回简洁的执行总结，说明结果、假设和范围限制。
+
+建议执行流程：
+1. 检查所选仓库范围，区分 `write` 与 `read` 仓库。
+2. 将所选命令映射到正确的 ponytail 技能或强度模式。
+3. 使用 ponytail 阶梯规则或对应辅助技能工作流执行任务。
+4. 所有修改仅限 `write` 仓库，`read` 仓库保持不变。
+5. 简洁总结结果、假设与跳过的工作。

@@ -1,0 +1,63 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/prompt-package.schema.json",
+  "version": "1.0.0",
+  "templateEngine": "handlebars",
+  "defaultLocale": "en-US",
+  "supportedLocales": [
+    "en-US",
+    "zh-CN"
+  ],
+  "inputs": [
+    {
+      "name": "projectPath",
+      "source": "system",
+      "required": true,
+      "description": "Absolute path to the selected project root."
+    },
+    {
+      "name": "repositoryPath",
+      "source": "computed-context",
+      "description": "Resolved repository identity hint for the selected project."
+    },
+    {
+      "name": "normalSessionInput",
+      "source": "task-preset-input",
+      "required": true,
+      "description": "User-authored task or question that should start the normal session."
+    },
+    {
+      "name": "targetScopeMarkdown",
+      "source": "task-preset-input",
+      "description": "Optional markdown block describing selected writable and read-only repositories."
+    },
+    {
+      "name": "targetRepositories",
+      "source": "computed-context",
+      "description": "Optional selected repositories resolved from the preset task scope."
+    },
+    {
+      "name": "referenceVaults",
+      "source": "computed-context",
+      "description": "Optional selected reference vaults."
+    },
+    {
+      "name": "targetProjects",
+      "source": "computed-context",
+      "description": "Optional selected cross-project references."
+    }
+  ],
+  "rendering": {
+    "strictVariables": false,
+    "trimBlocks": true
+  },
+  "locales": {
+    "en-US": {
+      "systemTemplate": "./templates/en-US/system.md",
+      "userTemplate": "./templates/en-US/user.hbs"
+    },
+    "zh-CN": {
+      "systemTemplate": "./templates/zh-CN/system.md",
+      "userTemplate": "./templates/zh-CN/user.hbs"
+    }
+  }
+}

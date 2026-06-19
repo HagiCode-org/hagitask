@@ -1,0 +1,133 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/panel.schema.json",
+  "surface": "drawer",
+  "title": {
+    "key": "taskPreset.title"
+  },
+  "description": {
+    "key": "taskPreset.description"
+  },
+  "defaultTitle": {
+    "key": "taskPreset.defaultTitle"
+  },
+  "submitLabel": {
+    "key": "taskPreset.submit"
+  },
+  "submittingLabel": {
+    "key": "taskPreset.submitting"
+  },
+  "sections": [
+    {
+      "id": "context",
+      "layout": "split",
+      "fields": [
+        {
+          "id": "projectId",
+          "renderer": "project-picker",
+          "label": {
+            "key": "panel.projectLabel"
+          },
+          "hint": {
+            "key": "panel.projectHint"
+          },
+          "required": true,
+          "output": "projectId"
+        },
+        {
+          "id": "title",
+          "renderer": "text",
+          "label": {
+            "key": "panel.taskNameLabel"
+          },
+          "hint": {
+            "key": "panel.taskNameHint"
+          },
+          "placeholder": {
+            "key": "panel.taskNamePlaceholder"
+          },
+          "output": "title"
+        },
+        {
+          "id": "targetRepositories",
+          "renderer": "repository-access-selector",
+          "label": {
+            "key": "panel.repositoryAccessLabel"
+          },
+          "hint": {
+            "key": "panel.repositoryAccessHint"
+          },
+          "output": "targetRepositories",
+          "selectionMode": "multiple",
+          "componentProps": {
+            "targetSelectionId": "targetRepositories",
+            "emptyTextKey": "panel.repositoryAccessEmpty"
+          }
+        }
+      ]
+    },
+    {
+      "id": "design-task",
+      "layout": "stack",
+      "fields": [
+        {
+          "id": "uiMasterCommandIds",
+          "renderer": "command-picker",
+          "label": {
+            "key": "panel.commandLabel"
+          },
+          "hint": {
+            "key": "panel.commandHint"
+          },
+          "required": true,
+          "output": "uiMasterCommandIds",
+          "selectionMode": "single",
+          "dataSource": "./commands.json"
+        },
+        {
+          "id": "uiMasterDescription",
+          "renderer": "multiline-text",
+          "inputType": "haginput",
+          "label": {
+            "key": "panel.detailLabel"
+          },
+          "hint": {
+            "key": "panel.detailHint"
+          },
+          "placeholder": {
+            "key": "panel.detailPlaceholder"
+          },
+          "required": true,
+          "output": "uiMasterDescription"
+        },
+        {
+          "id": "referenceVaultIds",
+          "renderer": "vault-role-selector",
+          "inputType": "text",
+          "label": {
+            "key": "panel.referenceVaultsLabel"
+          },
+          "hint": {
+            "key": "panel.referenceVaultsHint"
+          },
+          "required": false,
+          "output": "referenceVaultIds",
+          "selectionMode": "multiple"
+        },
+        {
+          "id": "targetProjects",
+          "renderer": "project-reference-selector",
+          "inputType": "text",
+          "label": {
+            "key": "panel.projectReferencesLabel"
+          },
+          "hint": {
+            "key": "panel.projectReferencesHint"
+          },
+          "required": false,
+          "output": "targetProjects",
+          "selectionMode": "multiple"
+        }
+      ]
+    }
+  ]
+}

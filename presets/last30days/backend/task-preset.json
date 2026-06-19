@@ -1,0 +1,58 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/task-preset.schema.json",
+  "taskKey": "last30days",
+  "scriptKey": "autotask.last30days",
+  "defaultTargetType": "repository",
+  "requirements": [
+    {
+      "type": "skills",
+      "name": "last30days"
+    }
+  ],
+  "targets": {
+    "repositories": {
+      "enabled": true,
+      "selections": [
+        {
+          "id": "targetRepositories",
+          "selectionMode": "multiple",
+          "allowedAccessTypes": [
+            "read",
+            "write"
+          ],
+          "output": "targetRepositories",
+          "scope": {
+            "source": "owner-project-repositories"
+          }
+        }
+      ]
+    },
+    "vaults": {
+      "enabled": false
+    },
+    "projects": {
+      "enabled": false
+    }
+  },
+  "inputBindings": [
+    {
+      "input": "last30daysMode",
+      "promptParameter": "last30daysMode",
+      "metadataKey": "autoTaskLast30daysMode",
+      "required": true
+    },
+    {
+      "input": "last30daysQuery",
+      "promptParameter": "last30daysQuery",
+      "metadataKey": "autoTaskLast30daysQuery",
+      "required": true
+    },
+    {
+      "input": "targetScopeMarkdown",
+      "promptParameter": "targetScopeMarkdown",
+      "metadataKey": "autoTaskTargetScopeMarkdown",
+      "producer": "frontend-computed",
+      "required": true
+    }
+  ]
+}

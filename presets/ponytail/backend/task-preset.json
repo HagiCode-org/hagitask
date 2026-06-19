@@ -1,0 +1,74 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/task-preset.schema.json",
+  "taskKey": "ponytail",
+  "scriptKey": "autotask.ponytail",
+  "defaultTargetType": "repository",
+  "requirements": [
+    {
+      "type": "skills",
+      "name": "ponytail"
+    },
+    {
+      "type": "skills",
+      "name": "ponytail-review"
+    },
+    {
+      "type": "skills",
+      "name": "ponytail-audit"
+    },
+    {
+      "type": "skills",
+      "name": "ponytail-debt"
+    },
+    {
+      "type": "skills",
+      "name": "ponytail-help"
+    }
+  ],
+  "targets": {
+    "repositories": {
+      "enabled": true,
+      "selections": [
+        {
+          "id": "targetRepositories",
+          "selectionMode": "multiple",
+          "allowedAccessTypes": [
+            "read",
+            "write"
+          ],
+          "output": "targetRepositories",
+          "scope": {
+            "source": "owner-project-repositories"
+          }
+        }
+      ]
+    },
+    "vaults": {
+      "enabled": false
+    },
+    "projects": {
+      "enabled": false
+    }
+  },
+  "inputBindings": [
+    {
+      "input": "ponytailCommandIds",
+      "promptParameter": "ponytailCommandIds",
+      "metadataKey": "autoTaskPonytailCommandIds",
+      "required": true
+    },
+    {
+      "input": "ponytailQuery",
+      "promptParameter": "ponytailQuery",
+      "metadataKey": "autoTaskPonytailQuery",
+      "required": true
+    },
+    {
+      "input": "targetScopeMarkdown",
+      "promptParameter": "targetScopeMarkdown",
+      "metadataKey": "autoTaskTargetScopeMarkdown",
+      "producer": "frontend-computed",
+      "required": true
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+重要：当前提示运行在非交互环境中。
+
+非交互规则：
+- 不要使用 AskUserQuestion 或任何交互式确认工具。
+- 本次会话不需要额外配置 skills。
+- 本次会话不需要额外补充 CLI 参数。
+- 当存在非关键细节缺口时，请基于已提供范围做出合理假设，并在响应中明确记录这些假设。
+
+任务：基于下面提供的范围与用户输入，启动一个普通聊天会话。
+
+执行上下文：
+- 工作目录：`{{projectPath}}`
+{{#if repositoryPath}}- 解析出的仓库提示：`{{repositoryPath}}`
+{{/if}}
+
+{{#if targetScopeMarkdown}}
+仓库范围：
+
+{{{targetScopeMarkdown}}}
+{{else}}
+仓库范围：当前没有显式选择仓库。
+{{/if}}
+
+{{#if referenceVaults}}
+参考 Vault：
+{{#each referenceVaults}}
+- `{{name}}`（`{{type}}`）路径：`{{physicalPath}}`
+{{/each}}
+{{else}}
+参考 Vault：未选择。
+{{/if}}
+
+{{#if targetProjects}}
+项目引用：
+{{#each targetProjects}}
+- `{{name}}` 路径：`{{physicalPath}}`（权限：`{{accessType}}`）
+{{/each}}
+{{else}}
+项目引用：未选择。
+{{/if}}
+
+用户输入：
+
+{{{normalSessionInput}}}
+
+要求：
+1. 把这次执行视为普通聊天会话的起始消息，而不是后台 auto-task 派发。
+2. 把给定的仓库、Vault、项目引用范围视为本次工作的权威上下文边界。
+3. 不要声称需要额外的 skills 配置。
+4. 不要声称需要额外的 CLI 参数。
+5. 如果上下文不完整，请直接做出合理假设并明确写出，而不是追问用户。
+6. 仅在显式选择为可写的仓库内进行修改。
+7. 把只读仓库、参考 Vault 和项目引用视为补充上下文。
+8. 返回一个可以立即继续执行的简洁响应。

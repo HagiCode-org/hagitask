@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "Normal Session",
+    "title": "Create Normal Session",
+    "description": "Start a normal chat session through the shared preset flow with repository, vault, and project-reference context.",
+    "defaultTitle": "New Normal Session",
+    "submit": "Create Normal Session",
+    "submitting": "Starting normal session..."
+  },
+  "panel": {
+    "projectLabel": "Project *",
+    "projectHint": "The normal session will be created in the selected project.",
+    "taskNameLabel": "Session title",
+    "taskNameHint": "Optional. Leave empty to let the title be optimized from the first message.",
+    "taskNamePlaceholder": "Help me review the backend session flow",
+    "repositoryAccessLabel": "Repository scope (optional)",
+    "repositoryAccessHint": "Optionally select writable and read-only repositories that should define the session boundary.",
+    "repositoryAccessEmpty": "No repositories are available for the selected project yet.",
+    "referenceVaultsLabel": "Vault scope",
+    "referenceVaultsHint": "Optionally attach vaults as reference-only context for notes, snippets, or previous explorations.",
+    "vaultEmptyTitle": "No vaults are available yet",
+    "vaultEmptyDescription": "Register a vault first if this session should reuse vault context.",
+    "projectReferencesLabel": "Project references",
+    "projectReferencesHint": "Optionally attach related projects as reference context for this normal session.",
+    "inputLabel": "What do you want to do? *",
+    "inputHint": "Describe the task, question, or direction for the normal chat session. The run is non-interactive, so include the important context here.",
+    "inputPlaceholder": "Inspect the current session creation flow, summarize the normal-session preset wiring, and make reasonable assumptions when details are missing."
+  }
+}

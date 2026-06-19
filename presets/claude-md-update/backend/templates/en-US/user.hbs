@@ -1,0 +1,41 @@
+IMPORTANT: This prompt may run in a non-interactive environment.
+
+Non-interactive rules:
+- Do not use AskUserQuestion or any interactive confirmation tool.
+- When an optional choice is needed, pick a reasonable default and record the assumption.
+- Skip optional confirmations and continue directly.
+
+Task: update the selected project's agent documentation using the resolved scope below. Focus on `AGENTS.md` as the primary data source; keep `CLAUDE.md` minimal as a redirect companion.
+
+Execution context:
+- Working directory: `{{projectPath}}`
+{{#if repositoryPath}}- Resolved repository hint: `{{repositoryPath}}`
+{{/if}}- Resolved scope key: `{{scope}}`
+
+Target file scope:
+
+{{{targetScopeMarkdown}}}
+
+Requirements:
+1. Read the existing `AGENTS.md` and `CLAUDE.md` before editing them.
+2. Keep changes scoped to the files explicitly listed in the target file scope.
+3. Treat `AGENTS.md` as the **primary documentation source**. Put all substantive instructions, commands, conventions, and agent behavior constraints there.
+4. Keep `CLAUDE.md` **minimal** — a redirect that states its content lives in `AGENTS.md`. Example pattern:
+   ```
+   # Claude Configuration
+   This file points to [AGENTS.md](./AGENTS.md) which is the source of truth for project-specific AI assistant configuration.
+   ```
+5. When `scope` is `project-only` or `root-only`, update the root `AGENTS.md` (primary) and `CLAUDE.md` (redirect).
+6. When `scope` is `root-and-children`, update all `AGENTS.md` / `CLAUDE.md` files listed in the scope block, following the same AGENTS-primary pattern for each.
+7. Preserve accurate existing instructions; remove stale guidance only when it is replaced by better current guidance.
+8. Reuse nearby repository conventions instead of inventing a new documentation format.
+9. Keep assumptions explicit, especially if a listed file is missing or a child repo has no existing maintenance doc.
+10. Return a concise summary of which files you changed and which scope was applied.
+
+Suggested execution flow:
+1. Inspect the selected project root and the listed child-repo files.
+2. Read existing `AGENTS.md` and `CLAUDE.md` content for each target.
+3. Compare the current docs against the repo's actual tooling and workflows.
+4. **Build `AGENTS.md` first** as the comprehensive source of truth.
+5. **Then update `CLAUDE.md`** as a minimal redirect to `AGENTS.md`.
+6. Summarize the result and any unresolved gaps.

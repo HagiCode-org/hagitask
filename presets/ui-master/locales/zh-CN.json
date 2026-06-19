@@ -1,0 +1,72 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "UI Master",
+    "title": "创建 UI Master 任务",
+    "description": "提交一个结构化的 UI Master task preset，统一承载命令分组、仓库范围和 scene 默认值。",
+    "defaultTitle": "新的 UI Master 任务",
+    "submit": "创建 UI Master 任务",
+    "submitting": "正在提交 UI Master 任务..."
+  },
+  "scene": {
+    "uiMasterDefault": {
+      "title": "UI Master 默认场景",
+      "summary": "用于 UI Master 派发与 captain 路由的默认 scene 注册。"
+    }
+  },
+  "panel": {
+    "projectLabel": "项目 *",
+    "projectHint": "UI Master 任务会在所选项目中创建。",
+    "taskNameLabel": "任务名",
+    "taskNameHint": "可选。不填时可在派发后异步优化标题。",
+    "taskNamePlaceholder": "优化首页 Hero 区域",
+    "repositoryAccessLabel": "目标仓库",
+    "repositoryAccessHint": "从所选项目中选择仓库，并逐项分配 read 或 write 权限。",
+    "repositoryAccessEmpty": "当前所选项目还没有可用仓库。",
+    "commandLabel": "Impeccable 命令 *",
+    "commandHint": "命令标签保留英文原文，意图说明通过本地化 tooltip 呈现。",
+    "detailLabel": "UI 调整说明 *",
+    "detailHint": "描述希望达成的 UI 结果、约束和你关心的取舍。",
+    "detailPlaceholder": "收紧层级、降低背景噪音、增强 CTA 对比，并改善移动端间距。",
+    "referenceVaultsLabel": "引用 Vault",
+    "referenceVaultsHint": "可选。把 Vault 作为只读参考上下文附加进来，用于补充素材、文档、代码片段或既有探索结果。",
+    "projectReferencesLabel": "项目引用",
+    "projectReferencesHint": "可选。把其他项目作为只读上下文附加进来，适合引用共享模式或相邻实现。"
+  },
+  "commands": {
+    "groups": {
+      "build": "构建",
+      "evaluate": "评估",
+      "refine": "润色",
+      "enhance": "增强",
+      "fix": "修正",
+      "iterate": "迭代"
+    },
+    "items": {
+      "craft": { "description": "为新界面或新组件方向建立更强的初始结构。" },
+      "impeccable": { "description": "运行核心 UI Master 流程，处理更有野心的界面打磨与 UX 塑形。" },
+      "shape": { "description": "为新的或大幅重做的界面概念重塑布局与层级。" },
+      "audit": { "description": "从 UX、可访问性、层级与阻力角度评估当前界面。" },
+      "critique": { "description": "清晰指出当前 UI 哪些地方存在问题。" },
+      "animate": { "description": "加入有目的的运动与过渡，提升清晰度与愉悦感。" },
+      "bolder": { "description": "把界面推向更强对比、更明确强调和更清晰的视觉自信。" },
+      "colorize": { "description": "重做色彩、点缀与氛围，同时保持整体一致。" },
+      "delight": { "description": "增加趣味、亲和力和记忆点，同时不伤害可用性。" },
+      "layout": { "description": "重做间距、构图与结构布局决策。" },
+      "overdrive": { "description": "探索更激进、更高能量的 UI 方向。" },
+      "quieter": { "description": "降低噪音，让布局更克制、更可控。" },
+      "typeset": { "description": "改善字体排版、行长、字号层级和文本节奏。" },
+      "adapt": { "description": "让 UI 适配不同表面、上下文或产品目标。" },
+      "clarify": { "description": "简化困惑元素，让界面更快被理解。" },
+      "distill": { "description": "把 UI 收敛到最核心的信号和决策。" },
+      "harden": { "description": "增强状态完备性、健壮性和生产可落地性。" },
+      "onboard": { "description": "改善首次使用理解、空状态和引导流程。" },
+      "optimize": { "description": "优化性能、响应性和交互效率。" },
+      "polish": { "description": "让 UI 更锋利、更完整、更接近生产级成品。" },
+      "document": { "description": "抽取可复用的界面指导、tokens 或文档化决策。" },
+      "extract": { "description": "从当前 UI 中抽出设计模式或可复用组件。" },
+      "live": { "description": "针对正在运行的界面做现场迭代调优。" },
+      "teach": { "description": "让协作者更容易理解并扩展当前 UI。" }
+    }
+  }
+}

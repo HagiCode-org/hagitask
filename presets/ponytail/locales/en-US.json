@@ -1,0 +1,42 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "Ponytail",
+    "title": "Create Ponytail Task",
+    "description": "Queue a structured Ponytail task preset with command-based mode selection, repository scope, and skill-first execution.",
+    "defaultTitle": "New Ponytail Task",
+    "submit": "Create Ponytail Task",
+    "submitting": "Queueing Ponytail task..."
+  },
+  "panel": {
+    "projectLabel": "Project *",
+    "projectHint": "The Ponytail task will be created in the selected project.",
+    "taskNameLabel": "Task name",
+    "taskNameHint": "Optional. Leave empty to let the title be optimized asynchronously after dispatch.",
+    "taskNamePlaceholder": "Simplify dashboard filter implementation",
+    "repositoryAccessLabel": "Target repositories",
+    "repositoryAccessHint": "Choose repositories from the selected project and assign read or write access per repository.",
+    "repositoryAccessEmpty": "No repositories are available for the selected project yet.",
+    "commandLabel": "Ponytail command *",
+    "commandHint": "Choose the Ponytail mode or tool to run. `full` is the recommended default command.",
+    "queryLabel": "Task description *",
+    "queryHint": "Describe the task, code target, audit scope, or help request Ponytail should handle.",
+    "queryPlaceholder": "Build a date range filter for the dashboard without over-engineering it."
+  },
+  "commands": {
+    "groups": {
+      "intensity": "Intensity",
+      "review": "Review",
+      "tools": "Tools"
+    },
+    "items": {
+      "lite": { "description": "Gentle guidance. Build what was asked, but name the lazier alternative in one line." },
+      "full": { "description": "Default. Enforce the ladder, prefer stdlib and native features, and keep the diff short." },
+      "ultra": { "description": "Ruthless minimum. Challenge extra scope and prefer deletion or a one-liner whenever possible." },
+      "review": { "description": "Review code or a diff for over-engineering, unnecessary abstractions, and obvious simplifications." },
+      "audit": { "description": "Scan a repository or project scope for bloat, dead flexibility, and stdlib or native replacements." },
+      "debt": { "description": "Collect `ponytail:` shortcuts into a debt ledger and distinguish deliberate deferrals from real complexity." },
+      "help": { "description": "Show the Ponytail quick reference for modes, triggers, skills, and usage patterns." }
+    }
+  }
+}

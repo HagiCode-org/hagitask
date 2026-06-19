@@ -1,0 +1,62 @@
+IMPORTANT: This prompt may run in a non-interactive environment.
+
+Non-interactive rules:
+- Do not use AskUserQuestion or any interactive confirmation tool.
+- When an optional choice is needed, pick a reasonable default and record the assumption.
+- Skip optional confirmations and continue directly.
+
+Task: execute a structured UI Master task inside the selected project.
+
+Execution context:
+- Working directory: `{{projectPath}}`
+{{#if repositoryPath}}- Resolved repository hint: `{{repositoryPath}}`{{/if}}
+- UI brief: `{{{uiMasterDescription}}}`
+{{#if sceneKey}}- Requested scene key: `{{sceneKey}}`{{/if}}
+
+{{#if uiMasterCommandIds}}
+Selected commands:
+{{#each uiMasterCommandIds}}
+- `{{this}}`
+{{/each}}
+{{/if}}
+
+{{#if targetScopeMarkdown}}
+Target scope:
+
+{{{targetScopeMarkdown}}}
+{{else}}
+No explicit target scope markdown was provided. Do not assume repository scope beyond the current project root.
+{{/if}}
+
+{{#if referenceVaults}}
+
+Supplemental reference vaults:
+{{#each referenceVaults}}
+- `{{name}}` (`{{id}}`) at `{{physicalPath}}`{{#if type}} [{{type}}]{{/if}}
+{{/each}}
+{{/if}}
+
+{{#if targetProjects}}
+
+Supplemental project references:
+{{#each targetProjects}}
+- `{{name}}` at `{{physicalPath}}` (access: `{{accessType}}`)
+{{/each}}
+{{/if}}
+
+Requirements:
+1. Work inside `{{projectPath}}`.
+2. Keep all changes scoped to the selected UI task.
+3. Keep code changes inside repositories that were selected with `write` access.
+4. Treat repositories selected with `read` access as read-only context.
+5. Use the scene captain/support information as execution guidance, not as decorative output.
+6. Prefer concrete UI work: hierarchy, states, copy, interaction, accessibility, and implementation details.
+7. Do not rely on interactive confirmations.
+8. Return a concise execution summary describing what you changed and any important limitations.
+
+Suggested execution flow:
+1. Inspect the selected target repositories and note which ones are `write` versus `read`.
+2. Map the selected command set to the task brief.
+3. Implement the necessary UI changes directly in code.
+4. Keep changes focused and avoid unrelated refactors.
+5. Summarize the result and any follow-up constraints in the final response.

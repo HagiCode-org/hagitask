@@ -1,0 +1,42 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "Ponytail",
+    "title": "创建 Ponytail 任务",
+    "description": "排队创建结构化的 Ponytail 任务预设，提供基于命令的模式选择、仓库范围和技能优先执行。",
+    "defaultTitle": "新建 Ponytail 任务",
+    "submit": "创建 Ponytail 任务",
+    "submitting": "正在排队 Ponytail 任务..."
+  },
+  "panel": {
+    "projectLabel": "项目 *",
+    "projectHint": "Ponytail 任务会在所选项目中创建。",
+    "taskNameLabel": "任务名称",
+    "taskNameHint": "可选。留空后会在派发后异步优化标题。",
+    "taskNamePlaceholder": "简化仪表盘筛选实现",
+    "repositoryAccessLabel": "目标仓库",
+    "repositoryAccessHint": "从所选项目中选择仓库，并为每个仓库分配读或写权限。",
+    "repositoryAccessEmpty": "所选项目当前还没有可用仓库。",
+    "commandLabel": "Ponytail 命令 *",
+    "commandHint": "选择要运行的 Ponytail 模式或工具。推荐默认命令是 `full`。",
+    "queryLabel": "任务描述 *",
+    "queryHint": "描述 Ponytail 需要处理的任务、代码目标、审计范围或帮助请求。",
+    "queryPlaceholder": "为仪表盘构建一个日期范围筛选器，但不要过度工程化。"
+  },
+  "commands": {
+    "groups": {
+      "intensity": "强度",
+      "review": "审查",
+      "tools": "工具"
+    },
+    "items": {
+      "lite": { "description": "轻量指导。完成需求本身，同时用一句话指出更懒的替代方案。" },
+      "full": { "description": "默认模式。执行完整阶梯，优先标准库和原生能力，保持最短改动。" },
+      "ultra": { "description": "极致最小化。质疑额外范围，能删就删，能一行就不用多行。" },
+      "review": { "description": "从过度工程化角度审查代码或 diff，指出不必要抽象和可简化点。" },
+      "audit": { "description": "扫描仓库或项目范围内的膨胀、无用灵活性，以及可替换为标准库或原生能力的部分。" },
+      "debt": { "description": "收集 `ponytail:` 注释形成债务清单，并区分刻意延期与真实复杂度。" },
+      "help": { "description": "显示 Ponytail 的模式、触发词、技能和用法速查卡。" }
+    }
+  }
+}

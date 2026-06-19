@@ -1,0 +1,30 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "普通会话",
+    "title": "创建普通会话",
+    "description": "通过共享 preset 流程启动普通聊天会话，并复用仓库、Vault 与项目引用上下文。",
+    "defaultTitle": "新普通会话",
+    "submit": "创建普通会话",
+    "submitting": "正在启动普通会话..."
+  },
+  "panel": {
+    "projectLabel": "项目 *",
+    "projectHint": "普通会话会在所选项目中创建。",
+    "taskNameLabel": "会话标题",
+    "taskNameHint": "可选。留空后可根据首条消息异步优化标题。",
+    "taskNamePlaceholder": "帮我审查当前的后端会话流程",
+    "repositoryAccessLabel": "仓库范围（可选）",
+    "repositoryAccessHint": "可选。选择本次会话应关注的可写或只读仓库，作为上下文边界。",
+    "repositoryAccessEmpty": "当前项目还没有可用仓库。",
+    "referenceVaultsLabel": "Vault 范围",
+    "referenceVaultsHint": "可选。把 Vault 作为只读参考上下文附加进来，用于复用笔记、片段或既有探索结果。",
+    "vaultEmptyTitle": "当前还没有可用 Vault",
+    "vaultEmptyDescription": "如果本次会话需要复用 Vault 上下文，请先注册 Vault。",
+    "projectReferencesLabel": "项目引用",
+    "projectReferencesHint": "可选。把相关项目作为参考上下文附加到本次普通会话中。",
+    "inputLabel": "你想做什么？ *",
+    "inputHint": "描述这次普通聊天会话的任务、问题或方向。当前运行是非交互的，所以请把关键上下文写在这里。",
+    "inputPlaceholder": "检查当前会话创建链路，总结 normal-session preset 的接线方式，并在细节不足时做出合理假设。"
+  }
+}

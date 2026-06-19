@@ -1,0 +1,32 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "代码调研",
+    "title": "创建代码调研任务",
+    "description": "围绕输出 CodeRef Vault、可选参考范围、可选项目上下文和仓库引入，提交一条结构化代码调研任务。",
+    "defaultTitle": "调研任务",
+    "submit": "排队调研任务",
+    "submitting": "正在排队调研任务..."
+  },
+  "panel": {
+    "projectLabel": "项目 *",
+    "projectHint": "调研会话会创建到当前选中的项目下。",
+    "taskNameLabel": "任务名称",
+    "taskNameHint": "可选。留空时会使用这个预设的默认会话标题。",
+    "taskNamePlaceholder": "preset-task 调研迁移审计",
+    "vaultScopeLabel": "Vault 范围 *",
+    "vaultScopeHint": "选择 1 个 CodeRef 输出 Vault，并在同一个选择器里按需附加参考 Vault。",
+    "vaultEmptyTitle": "当前没有可用的 CodeRef Vault",
+    "vaultEmptyDescription": "请先注册一个 CodeRef Vault，然后再回来创建调研会话。",
+    "vaultRequiredMessage": "开始调研前请先选择 1 个 CodeRef Vault 作为输出目标。",
+    "projectReferencesLabel": "项目引用",
+    "projectReferencesHint": "按需附加其他项目作为只读或可编辑的调研上下文。",
+    "repositoryUrlsLabel": "Git 仓库",
+    "repositoryUrlsHint": "每行输入一个仓库地址。空行会被忽略，重复地址会在提交前自动去重。",
+    "repositoryUrlsPlaceholder": "https://github.com/org/repo-a.git\nhttps://github.com/org/repo-b.git",
+    "directionLabel": "调研方向 *",
+    "directionHint": "明确写出调研目标、期望证据，以及是否涉及跨仓协同。",
+    "directionPlaceholder": "请重点分析调研流程如何迁移到共享 preset-task 架构，包括后端校验、共享抽屉体验和清理风险。",
+    "directionRequiredMessage": "提交前请填写调研方向。"
+  }
+}
