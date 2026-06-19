@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hagicode.local/designs/task-preset-plugin-schemas/prompt-package.schema.json",
+  "title": "Task Preset Plugin Prompt Package",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "templateEngine",
+    "defaultLocale",
+    "supportedLocales",
+    "inputs",
+    "locales"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "templateEngine": {
+      "type": "string",
+      "enum": [
+        "handlebars"
+      ]
+    },
+    "defaultLocale": {
+      "type": "string"
+    },
+    "supportedLocales": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/input"
+      }
+    },
+    "partials": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "rendering": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "strictVariables": {
+          "type": "boolean"
+        },
+        "trimBlocks": {
+          "type": "boolean"
+        }
+      }
+    },
+    "locales": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "$ref": "#/$defs/localePrompt"
+      }
+    }
+  },
+  "$defs": {
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "source"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "task-preset-input",
+            "session-metadata",
+            "computed-context",
+            "system"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "localePrompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "systemTemplate",
+        "userTemplate"
+      ],
+      "properties": {
+        "systemTemplate": {
+          "type": "string"
+        },
+        "developerTemplate": {
+          "type": "string"
+        },
+        "userTemplate": {
+          "type": "string"
+        },
+        "outputSchema": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

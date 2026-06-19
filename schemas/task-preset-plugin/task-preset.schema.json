@@ -1,0 +1,336 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hagicode.local/designs/task-preset-plugin-schemas/task-preset.schema.json",
+  "title": "Task Preset Plugin Backend Definition",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "taskKey",
+    "scriptKey",
+    "defaultTargetType",
+    "targets",
+    "inputBindings"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "taskKey": {
+      "type": "string"
+    },
+    "scriptKey": {
+      "type": "string"
+    },
+    "defaultTargetType": {
+      "type": "string",
+      "enum": [
+        "repository",
+        "vault",
+        "project"
+      ]
+    },
+    "scene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "defaultSceneKey",
+        "registrations"
+      ],
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "defaultSceneKey": {
+          "type": "string"
+        },
+        "registrations": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/sceneRegistration"
+          }
+        }
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/requirement"
+      }
+    },
+    "targets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repositories",
+        "vaults",
+        "projects"
+      ],
+      "properties": {
+        "repositories": {
+          "$ref": "#/$defs/targetCollection"
+        },
+        "vaults": {
+          "$ref": "#/$defs/targetCollection"
+        },
+        "projects": {
+          "$ref": "#/$defs/targetCollection"
+        }
+      }
+    },
+    "inputBindings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/inputBinding"
+      }
+    }
+  },
+  "$defs": {
+    "targetCollection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "selections": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/selection"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "enabled": {
+                "const": true
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "selections"
+            ]
+          }
+        }
+      ]
+    },
+    "selection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "selectionMode",
+        "output"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "selectionMode": {
+          "type": "string",
+          "enum": [
+            "single",
+            "multiple"
+          ]
+        },
+        "accessType": {
+          "type": "string",
+          "enum": [
+            "read",
+            "write"
+          ]
+        },
+        "allowedAccessTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "enum": [
+              "read",
+              "write"
+            ]
+          }
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "output": {
+          "type": "string"
+        },
+        "mutuallyExclusiveWith": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "scope": {
+          "$ref": "#/$defs/selectionScope"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "accessType"
+          ]
+        },
+        {
+          "required": [
+            "allowedAccessTypes"
+          ]
+        }
+      ]
+    },
+    "selectionScope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source"
+      ],
+      "properties": {
+        "source": {
+          "type": "string",
+          "enum": [
+            "owner-project-repositories",
+            "vault-registry",
+            "project-registry"
+          ]
+        },
+        "allowedVaultTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "includeSystemManaged": {
+          "type": "boolean"
+        },
+        "allowOwnerProject": {
+          "type": "boolean"
+        }
+      }
+    },
+    "sceneRegistration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sceneKey"
+      ],
+      "properties": {
+        "sceneKey": {
+          "type": "string"
+        },
+        "titleKey": {
+          "type": "string"
+        },
+        "summaryKey": {
+          "type": "string"
+        },
+        "descriptionKey": {
+          "type": "string"
+        }
+      }
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "name"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "cli",
+            "skills"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "type": "string",
+          "minLength": 1
+        },
+        "args": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "skills"
+              }
+            }
+          },
+          "then": {
+            "not": {
+              "required": [
+                "command"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "inputBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "input"
+      ],
+      "properties": {
+        "input": {
+          "type": "string"
+        },
+        "promptParameter": {
+          "type": "string"
+        },
+        "metadataKey": {
+          "type": "string"
+        },
+        "producer": {
+          "type": "string",
+          "enum": [
+            "field-output",
+            "frontend-computed",
+            "runtime-defaulted"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "promptParameter"
+          ]
+        },
+        {
+          "required": [
+            "metadataKey"
+          ]
+        }
+      ]
+    }
+  }
+}
