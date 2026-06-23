@@ -1,0 +1,61 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/task-preset.schema.json",
+  "taskKey": "goal",
+  "scriptKey": "autotask.goal",
+  "defaultTargetType": "repository",
+  "requirements": [
+    {
+      "type": "agent",
+      "names": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "targets": {
+    "repositories": {
+      "enabled": true,
+      "selections": [
+        {
+          "id": "targetRepositories",
+          "selectionMode": "multiple",
+          "allowedAccessTypes": [
+            "read",
+            "write"
+          ],
+          "output": "targetRepositories",
+          "required": false,
+          "scope": {
+            "source": "owner-project-repositories"
+          }
+        }
+      ]
+    },
+    "vaults": {
+      "enabled": false
+    },
+    "projects": {
+      "enabled": false
+    }
+  },
+  "inputBindings": [
+    {
+      "input": "goalCommandIds",
+      "promptParameter": "goalCommandIds",
+      "metadataKey": "autoTaskGoalCommandIds",
+      "required": true
+    },
+    {
+      "input": "goalDescription",
+      "promptParameter": "goalDescription",
+      "metadataKey": "autoTaskGoalDescription",
+      "required": true
+    },
+    {
+      "input": "targetScopeMarkdown",
+      "promptParameter": "targetScopeMarkdown",
+      "metadataKey": "targetScopeMarkdown",
+      "producer": "frontend-computed"
+    }
+  ]
+}

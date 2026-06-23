@@ -69,6 +69,7 @@ HagiTask-specific adapter.
 Currently shipped packages:
 
 - `claude-md-update`
+- `goal`
 - `last30days`
 - `normal-session`
 - `ponytail`

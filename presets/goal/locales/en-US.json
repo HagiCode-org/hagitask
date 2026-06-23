@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "Goal",
+    "title": "Create Goal Task",
+    "description": "Queue a sustained-work goal task with repository scope and compatible hero filtering.",
+    "defaultTitle": "New Goal Task",
+    "submit": "Create Goal Task",
+    "submitting": "Queueing goal task..."
+  },
+  "panel": {
+    "projectLabel": "Project *",
+    "projectHint": "The goal task will be created in the selected project.",
+    "taskNameLabel": "Session title",
+    "taskNameHint": "Optional. Leave empty to let the title be optimized from the goal description.",
+    "taskNamePlaceholder": "Drive the preset-task compatibility rollout to completion",
+    "repositoryAccessLabel": "Repository scope (optional)",
+    "repositoryAccessHint": "Optionally select writable and read-only repositories that define the sustained-work boundary.",
+    "repositoryAccessEmpty": "No repositories are available for the selected project yet.",
+    "commandLabel": "Goal command",
+    "commandHint": "The bundled goal preset always dispatches through `/goal`.",
+    "goalLabel": "Goal description *",
+    "goalHint": "Describe the sustained-work objective, expected outcome, and any critical constraints.",
+    "goalPlaceholder": "Implement preset-agent compatibility end to end, keep the task list current, and avoid interactive clarification."
+  },
+  "commands": {
+    "groups": {
+      "goal": "Goal"
+    },
+    "items": {
+      "goal": {
+        "description": "Use the bundled `/goal` sustained-work command surface."
+      }
+    }
+  }
+}

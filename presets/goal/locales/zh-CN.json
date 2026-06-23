@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "Goal",
+    "title": "创建 Goal 任务",
+    "description": "创建一个带仓库范围与兼容英雄过滤的持续工作 Goal 任务。",
+    "defaultTitle": "新 Goal 任务",
+    "submit": "创建 Goal 任务",
+    "submitting": "正在排队 Goal 任务..."
+  },
+  "panel": {
+    "projectLabel": "项目 *",
+    "projectHint": "Goal 任务会在所选项目中创建。",
+    "taskNameLabel": "会话标题",
+    "taskNameHint": "可选。留空后会根据目标说明自动优化标题。",
+    "taskNamePlaceholder": "持续推进 preset-task 兼容能力接入",
+    "repositoryAccessLabel": "仓库范围（可选）",
+    "repositoryAccessHint": "可选选择可写与只读仓库，作为持续工作边界。",
+    "repositoryAccessEmpty": "所选项目当前还没有可用仓库。",
+    "commandLabel": "Goal 命令",
+    "commandHint": "内置 Goal 预设始终通过 `/goal` 派发。",
+    "goalLabel": "目标说明 *",
+    "goalHint": "描述这次持续工作的主要目标、期望结果，以及任何关键约束。",
+    "goalPlaceholder": "端到端完成 preset-agent compatibility 接入，保持任务清单同步，并避免交互式澄清。"
+  },
+  "commands": {
+    "groups": {
+      "goal": "Goal"
+    },
+    "items": {
+      "goal": {
+        "description": "使用内置的 `/goal` 持续工作命令表面。"
+      }
+    }
+  }
+}
