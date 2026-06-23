@@ -1,0 +1,36 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/locales.schema.json",
+  "taskPreset": {
+    "displayName": "OpenSpec Spec Compress",
+    "title": "Create OpenSpec Spec Compress Task",
+    "description": "Queue a structured OpenSpec spec compression cleanup task with documented guardrails and non-interactive defaults.",
+    "defaultTitle": "New OpenSpec Spec Compress Task",
+    "submit": "Create OpenSpec Spec Compress Task",
+    "submitting": "Queueing OpenSpec spec compression task..."
+  },
+  "panel": {
+    "projectLabel": "Project *",
+    "projectHint": "The OpenSpec compression task will be created in the selected project.",
+    "taskNameLabel": "Task name",
+    "taskNameHint": "Optional. Leave empty to let the title be optimized asynchronously after dispatch.",
+    "taskNamePlaceholder": "Compress active OpenSpec specs without touching active changes",
+    "repositoryAccessLabel": "Repository scope (optional)",
+    "repositoryAccessHint": "Optionally select read/write repositories that provide nearby implementation context. OpenSpec asset writes remain constrained by the preset workflow.",
+    "repositoryAccessEmpty": "No repositories are available for the selected project yet.",
+    "commandLabel": "OpenSpec command *",
+    "commandHint": "Pick the built-in compression workflow command.",
+    "briefLabel": "Compression brief *",
+    "briefHint": "Describe what should be compressed, any capability priorities, and any boundaries that must be preserved.",
+    "briefPlaceholder": "Compress stale specs under openspec/specs, flatten delta headers, archive retired capabilities with git mv, preserve active requirements, and do not modify openspec/changes."
+  },
+  "commands": {
+    "groups": {
+      "compression": "Compression"
+    },
+    "items": {
+      "compress-specs": {
+        "description": "Compress and normalize OpenSpec specs under openspec/specs while preserving active requirements and active change proposals."
+      }
+    }
+  }
+}

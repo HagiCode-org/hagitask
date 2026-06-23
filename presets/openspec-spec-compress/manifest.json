@@ -1,0 +1,47 @@
+{
+  "$schema": "../../schemas/task-preset-plugin/manifest.schema.json",
+  "schemaVersion": "1.0",
+  "taskPresetId": "openspec-spec-compress",
+  "version": "1.0.0",
+  "icon": "file-text",
+  "displayName": {
+    "key": "taskPreset.displayName"
+  },
+  "description": {
+    "key": "taskPreset.description"
+  },
+  "kind": "custom-executor",
+  "status": "experimental",
+  "owner": "PCode Team",
+  "entrypoints": {
+    "menuSurface": "session-create",
+    "drawerId": "openspec-spec-compress"
+  },
+  "activation": {
+    "defaultState": "passive"
+  },
+  "localization": {
+    "strategy": "plugin-bundles",
+    "namespace": "openspec-spec-compress",
+    "defaultLocale": "en-US",
+    "supportedLocales": [
+      "en-US",
+      "zh-CN"
+    ],
+    "bundles": {
+      "en-US": "./locales/en-US.json",
+      "zh-CN": "./locales/zh-CN.json"
+    }
+  },
+  "ui": {
+    "panel": "./frontend/panel.json",
+    "commands": "./frontend/commands.json"
+  },
+  "site": {
+    "storePage": "./store-page/"
+  },
+  "backend": {
+    "taskPreset": "./backend/task-preset.json",
+    "prompts": "./backend/prompts.json"
+  }
+}

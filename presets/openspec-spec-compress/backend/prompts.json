@@ -1,0 +1,59 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/prompt-package.schema.json",
+  "version": "1.0.0",
+  "templateEngine": "handlebars",
+  "defaultLocale": "en-US",
+  "supportedLocales": [
+    "en-US",
+    "zh-CN"
+  ],
+  "inputs": [
+    {
+      "name": "projectPath",
+      "source": "system",
+      "required": true,
+      "description": "Absolute path to the selected project root."
+    },
+    {
+      "name": "repositoryPath",
+      "source": "computed-context",
+      "description": "Resolved repository identity hint for the selected project."
+    },
+    {
+      "name": "openspecSpecCompressCommandIds",
+      "source": "task-preset-input",
+      "required": true,
+      "description": "Selected OpenSpec spec compression command id."
+    },
+    {
+      "name": "compressionBrief",
+      "source": "task-preset-input",
+      "required": true,
+      "description": "Required operator brief describing the desired OpenSpec compression scope and priorities."
+    },
+    {
+      "name": "targetScopeMarkdown",
+      "source": "task-preset-input",
+      "description": "Optional markdown block describing selected writable and read-only repositories."
+    },
+    {
+      "name": "targetRepositories",
+      "source": "computed-context",
+      "description": "Optional selected repositories resolved from the preset task scope."
+    }
+  ],
+  "rendering": {
+    "strictVariables": false,
+    "trimBlocks": true
+  },
+  "locales": {
+    "en-US": {
+      "systemTemplate": "./templates/en-US/system.md",
+      "userTemplate": "./templates/en-US/user.hbs"
+    },
+    "zh-CN": {
+      "systemTemplate": "./templates/zh-CN/system.md",
+      "userTemplate": "./templates/zh-CN/user.hbs"
+    }
+  }
+}

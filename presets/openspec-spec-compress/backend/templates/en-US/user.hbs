@@ -1,0 +1,58 @@
+IMPORTANT: This prompt may run in a non-interactive environment.
+
+Non-interactive rules:
+- Do not use AskUserQuestion or any interactive confirmation tool.
+- When an optional choice is needed, pick a reasonable default and record the assumption.
+- Skip optional confirmations and continue directly.
+
+Task: execute a structured OpenSpec spec compression task for the selected project.
+
+Execution context:
+- Working directory: `{{projectPath}}`
+{{#if repositoryPath}}- Resolved repository hint: `{{repositoryPath}}`
+{{/if}}- Selected command:
+{{#each openspecSpecCompressCommandIds}}
+  - `{{this}}`
+{{/each}}
+- Compression brief: `{{{compressionBrief}}}`
+
+{{#if targetScopeMarkdown}}
+Repository scope:
+
+{{{targetScopeMarkdown}}}
+{{else}}
+No explicit repository scope markdown was provided. Treat repositories outside the current project root as out of scope.
+{{/if}}
+
+{{#if targetRepositories}}
+
+Selected repositories:
+{{#each targetRepositories}}
+- `{{displayName}}` at `{{path}}` (access: `{{accessType}}`)
+{{/each}}
+{{/if}}
+
+Requirements:
+1. Work inside `{{projectPath}}`.
+2. Treat `docs/openspec-spec-compression.md` as the authoritative workflow reference for this task.
+3. Restrict OpenSpec asset edits to `openspec/specs/` and `openspec/specs/archive/` unless the user explicitly expands scope.
+4. Do not modify active `openspec/changes/` content as part of the compression workflow.
+5. Preserve active requirements. Mechanical cleanup is allowed; content-level semantic rewrites are not the default goal.
+6. Use `git mv` when archiving retired specs into `openspec/specs/archive/`.
+7. Run incremental validation with `openspec validate --specs --no-interactive` after meaningful compression steps.
+8. Establish or restate a validation baseline before major edits when practical.
+9. Flatten delta headers like `## ADDED Requirements` / `## MODIFIED Requirements` into a single main `## Requirements` section when the workflow identifies them.
+10. Neutralize removed-history requirement headings in the documented safe form instead of deleting historical context blindly.
+11. Do not force mechanical fixes for content-level issues that require manual requirement authoring, such as missing `SHALL` / `MUST`, missing `Scenario`, or large semantic spec redesign.
+12. Keep file edits restricted to repositories selected with `write` access.
+13. Treat repositories selected with `read` access as read-only context.
+14. Do not ask follow-up questions in non-interactive runs; make a reasonable assumption and record it instead.
+15. Return a concise summary of edits, validation status, assumptions, and any remaining manual-follow-up items.
+
+Suggested execution flow:
+1. Read `docs/openspec-spec-compression.md` and inspect the current `openspec/specs/` state.
+2. Record a validation baseline using `openspec validate --specs --no-interactive` when practical.
+3. Identify retired specs, unflattened delta headers, scattered requirement blocks, or missing required sections using the documented workflow.
+4. Apply only the documented mechanical cleanup steps.
+5. Re-run validation after each logical batch so failures trend downward or stay explained.
+6. Summarize what changed, what was intentionally left alone, and which assumptions were used.

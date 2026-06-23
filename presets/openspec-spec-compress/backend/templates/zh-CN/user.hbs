@@ -1,0 +1,58 @@
+重要：此提示词可能运行在非交互环境中。
+
+非交互规则：
+- 不要使用 AskUserQuestion 或任何交互式确认工具。
+- 当出现可选分支时，直接选择合理默认值，并在结果里记录假设。
+- 跳过可选确认，直接执行。
+
+任务：在所选项目中执行一次结构化的 OpenSpec spec 压缩任务。
+
+执行上下文：
+- 工作目录：`{{projectPath}}`
+{{#if repositoryPath}}- 解析后的仓库提示：`{{repositoryPath}}`
+{{/if}}- 已选命令：
+{{#each openspecSpecCompressCommandIds}}
+  - `{{this}}`
+{{/each}}
+- 压缩说明：`{{{compressionBrief}}}`
+
+{{#if targetScopeMarkdown}}
+仓库范围：
+
+{{{targetScopeMarkdown}}}
+{{else}}
+本次没有提供明确的仓库范围文本。把当前项目根目录之外的仓库视为超出范围。
+{{/if}}
+
+{{#if targetRepositories}}
+
+已选仓库：
+{{#each targetRepositories}}
+- `{{displayName}}` 位于 `{{path}}`（权限：`{{accessType}}`）
+{{/each}}
+{{/if}}
+
+要求：
+1. 始终在 `{{projectPath}}` 内工作。
+2. 把 `docs/openspec-spec-compression.md` 视为本次任务的权威工作流参考。
+3. 除非用户明确扩展范围，否则 OpenSpec 资产编辑必须限制在 `openspec/specs/` 与 `openspec/specs/archive/`。
+4. 不要把 active `openspec/changes/` 内容纳入本次压缩流程的默认修改范围。
+5. 保留活跃 requirement。允许机械式清理，但默认目标不是做语义级重写。
+6. 将退役 spec 归档到 `openspec/specs/archive/` 时必须使用 `git mv`。
+7. 在有意义的压缩步骤后，运行 `openspec validate --specs --no-interactive` 做增量校验。
+8. 在大规模编辑前，若条件允许，先建立或复述 validate 基线。
+9. 当工作流识别出 `## ADDED Requirements` / `## MODIFIED Requirements` 之类的 delta 头时，应按文档规则扁平化到单一主 `## Requirements` 段中。
+10. 对 removed 历史 requirement，使用文档里定义的安全中性化写法，而不是盲目删除历史内容。
+11. 不要强行机械修复那些需要人工逐条编写的内容级问题，例如缺少 `SHALL` / `MUST`、缺少 `Scenario`，或大规模语义拆分重设计。
+12. 所有文件修改都必须限制在被标记为 `write` 的仓库内。
+13. 被标记为 `read` 的仓库只能作为只读上下文。
+14. 在非交互运行中不要追问；需要决策时直接采用合理默认值并记录假设。
+15. 最终返回简洁总结，说明编辑、校验状态、假设，以及仍需人工后续处理的事项。
+
+建议执行流程：
+1. 阅读 `docs/openspec-spec-compression.md`，并检查当前 `openspec/specs/` 状态。
+2. 若条件允许，先用 `openspec validate --specs --no-interactive` 记录校验基线。
+3. 按文档工作流识别退役 spec、未扁平化的 delta 头、散落的 requirement 块，或缺失的必需段。
+4. 只应用文档明确允许的机械式清理步骤。
+5. 每完成一批逻辑修改就重新校验，确保失败趋势下降或至少有明确解释。
+6. 总结哪些内容被修改、哪些内容被刻意保留，以及使用了哪些假设。

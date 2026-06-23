@@ -1,0 +1,66 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/task-preset.schema.json",
+  "taskKey": "openspecSpecCompress",
+  "scriptKey": "autotask.openspec-spec-compress",
+  "defaultTargetType": "repository",
+  "requirements": [
+    {
+      "type": "agent",
+      "name": "any"
+    },
+    {
+      "type": "cli",
+      "name": "openspec",
+      "command": "openspec",
+      "args": [
+        "--help"
+      ]
+    }
+  ],
+  "targets": {
+    "repositories": {
+      "enabled": true,
+      "selections": [
+        {
+          "id": "targetRepositories",
+          "selectionMode": "multiple",
+          "allowedAccessTypes": [
+            "read",
+            "write"
+          ],
+          "output": "targetRepositories",
+          "required": false,
+          "scope": {
+            "source": "owner-project-repositories"
+          }
+        }
+      ]
+    },
+    "vaults": {
+      "enabled": false
+    },
+    "projects": {
+      "enabled": false
+    }
+  },
+  "inputBindings": [
+    {
+      "input": "openspecSpecCompressCommandIds",
+      "promptParameter": "openspecSpecCompressCommandIds",
+      "metadataKey": "autoTaskOpenSpecSpecCompressCommandIds",
+      "required": true
+    },
+    {
+      "input": "compressionBrief",
+      "promptParameter": "compressionBrief",
+      "metadataKey": "autoTaskOpenSpecSpecCompressBrief",
+      "required": true
+    },
+    {
+      "input": "targetScopeMarkdown",
+      "promptParameter": "targetScopeMarkdown",
+      "metadataKey": "autoTaskTargetScopeMarkdown",
+      "producer": "frontend-computed"
+    }
+  ]
+}

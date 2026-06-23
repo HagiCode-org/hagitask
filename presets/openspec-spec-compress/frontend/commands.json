@@ -1,0 +1,24 @@
+{
+  "$schema": "../../../schemas/task-preset-plugin/commands.schema.json",
+  "schemaVersion": "1.1",
+  "selectionMode": "single",
+  "groups": [
+    {
+      "id": "compression",
+      "title": {
+        "key": "commands.groups.compression"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "compress-specs",
+      "groupId": "compression",
+      "label": "compress-specs",
+      "description": {
+        "key": "commands.items.compress-specs.description"
+      },
+      "preludeTemplate": "compress-specs {compressionBrief}"
+    }
+  ]
+}
