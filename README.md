@@ -72,6 +72,7 @@ Currently shipped packages:
 - `goal`
 - `last30days`
 - `normal-session`
+- `openspec-spec-compress`
 - `ponytail`
 - `research-investigation`
 - `ui-master`
@@ -87,6 +88,9 @@ loading cutover (see `openspec/changes/migrate-preset-task-to-hagitask-repo`),
 `hagicode-core` will load shipped presets from `repos/hagitask/presets` through the
 `TaskPresetPlugins.PresetGroups` configuration and the backend-owned copy will no
 longer be the shipped source of truth.
+
+Until that cutover lands, every shipped preset update — including `openspec-spec-compress` —
+must keep the `hagicode-core` runtime copy synchronized with the canonical HagiTask package.
 
 ## Contributing a Preset Package
 
