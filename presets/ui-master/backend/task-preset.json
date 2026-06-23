@@ -3,18 +3,11 @@
   "taskKey": "uiMaster",
   "scriptKey": "autotask.ui-master",
   "defaultTargetType": "repository",
-  "scene": {
-    "provider": "hero-ui-master-scene",
-    "defaultSceneKey": "ui-master-default",
-    "registrations": [
-      {
-        "sceneKey": "ui-master-default",
-        "titleKey": "scene.uiMasterDefault.title",
-        "summaryKey": "scene.uiMasterDefault.summary"
-      }
-    ]
-  },
   "requirements": [
+    {
+      "type": "agent",
+      "name": "any"
+    },
     {
       "type": "skills",
       "name": "impeccable"
@@ -32,6 +25,17 @@
       ]
     }
   ],
+  "scene": {
+    "provider": "hero-ui-master-scene",
+    "defaultSceneKey": "ui-master-default",
+    "registrations": [
+      {
+        "sceneKey": "ui-master-default",
+        "titleKey": "scene.uiMasterDefault.title",
+        "summaryKey": "scene.uiMasterDefault.summary"
+      }
+    ]
+  },
   "targets": {
     "repositories": {
       "enabled": true,

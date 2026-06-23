@@ -5,6 +5,10 @@
   "defaultTargetType": "repository",
   "requirements": [
     {
+      "type": "agent",
+      "name": "any"
+    },
+    {
       "type": "skills",
       "name": "last30days"
     }

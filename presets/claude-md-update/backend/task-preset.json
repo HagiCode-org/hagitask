@@ -3,7 +3,12 @@
   "taskKey": "claudeMdUpdate",
   "scriptKey": "autotask.claude-md-update",
   "defaultTargetType": "repository",
-  "requirements": [],
+  "requirements": [
+    {
+      "type": "agent",
+      "name": "any"
+    }
+  ],
   "targets": {
     "repositories": {
       "enabled": false

@@ -3,7 +3,12 @@
   "taskKey": "normalSession",
   "scriptKey": "preset.normal-session",
   "defaultTargetType": "repository",
-  "requirements": [],
+  "requirements": [
+    {
+      "type": "agent",
+      "name": "any"
+    }
+  ],
   "targets": {
     "repositories": {
       "enabled": true,

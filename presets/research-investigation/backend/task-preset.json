@@ -3,7 +3,12 @@
   "taskKey": "researchInvestigation",
   "scriptKey": "autotask.research-investigation",
   "defaultTargetType": "vault",
-  "requirements": [],
+  "requirements": [
+    {
+      "type": "agent",
+      "name": "any"
+    }
+  ],
   "targets": {
     "repositories": {
       "enabled": false
