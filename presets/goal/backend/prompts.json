@@ -1,6 +1,6 @@
 {
   "$schema": "../../../schemas/task-preset-plugin/prompt-package.schema.json",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "templateEngine": "handlebars",
   "defaultLocale": "en-US",
   "supportedLocales": [
@@ -46,14 +46,65 @@
     "strictVariables": false,
     "trimBlocks": true
   },
-  "locales": {
-    "en-US": {
-      "systemTemplate": "./templates/en-US/system.md",
-      "userTemplate": "./templates/en-US/user.hbs"
-    },
-    "zh-CN": {
-      "systemTemplate": "./templates/zh-CN/system.md",
-      "userTemplate": "./templates/zh-CN/user.hbs"
+  "variants": {
+    "selectors": [
+      "agent",
+      "language"
+    ],
+    "entries": [
+      {
+        "id": "native-en-us",
+        "match": {
+          "agent": [
+            "claude",
+            "codex"
+          ],
+          "language": [
+            "en-US"
+          ]
+        },
+        "systemTemplate": "./templates/en-US/native.system.md",
+        "userTemplate": "./templates/en-US/native.user.hbs"
+      },
+      {
+        "id": "native-zh-cn",
+        "match": {
+          "agent": [
+            "claude",
+            "codex"
+          ],
+          "language": [
+            "zh-CN"
+          ]
+        },
+        "systemTemplate": "./templates/zh-CN/native.system.md",
+        "userTemplate": "./templates/zh-CN/native.user.hbs"
+      },
+      {
+        "id": "fallback-en-us",
+        "match": {
+          "language": [
+            "en-US"
+          ]
+        },
+        "systemTemplate": "./templates/en-US/fallback.system.md",
+        "userTemplate": "./templates/en-US/fallback.user.hbs"
+      },
+      {
+        "id": "fallback-zh-cn",
+        "match": {
+          "language": [
+            "zh-CN"
+          ]
+        },
+        "systemTemplate": "./templates/zh-CN/fallback.system.md",
+        "userTemplate": "./templates/zh-CN/fallback.user.hbs"
+      }
+    ],
+    "fallback": {
+      "id": "fallback-default",
+      "systemTemplate": "./templates/en-US/fallback.system.md",
+      "userTemplate": "./templates/en-US/fallback.user.hbs"
     }
   }
 }

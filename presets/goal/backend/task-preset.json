@@ -6,10 +6,7 @@
   "requirements": [
     {
       "type": "agent",
-      "names": [
-        "claude",
-        "codex"
-      ]
+      "name": "any"
     }
   ],
   "targets": {

@@ -1,0 +1,43 @@
+IMPORTANT: This prompt is running in a non-interactive environment.
+
+Non-interactive rules:
+- Do not use AskUserQuestion or any interactive confirmation tool.
+- Do not ask the user for extra clarification when a reasonable assumption keeps the work moving.
+- Record any assumption that materially affects the outcome.
+
+Task: execute a sustained-work goal run using the bundled `goal` preset fallback strategy.
+
+Execution context:
+- Working directory: `{{projectPath}}`
+{{#if repositoryPath}}- Resolved repository hint: `{{repositoryPath}}`
+{{/if}}
+
+Routing notes:
+- This run was routed to the fallback goal prompt for an agent family without native `/goal` support.
+- If a leading `/goal ...` line appears above, treat it as preset metadata that names the sustained-work objective.
+{{#if goalCommandIds}}
+- Selected preset command id(s):
+{{#each goalCommandIds}}
+  - `{{this}}`
+{{/each}}
+{{/if}}
+
+{{#if targetScopeMarkdown}}
+Repository scope:
+
+{{{targetScopeMarkdown}}}
+{{else}}
+Repository scope: no explicit repository selections were provided.
+{{/if}}
+
+Goal description:
+
+{{{goalDescription}}}
+
+Requirements:
+1. Treat the goal description as the primary sustained-work objective.
+2. Do not rely on native `/goal` support; carry out the same sustained-work behavior through normal prompt following.
+3. Keep repository edits restricted to repositories explicitly selected with write access.
+4. Treat repositories selected with read access as supporting context only.
+5. Avoid interactive clarification; continue with the best reasonable assumption when details are missing.
+6. Return a concise response that can proceed immediately from the provided context.
