@@ -1,13 +1,15 @@
-IMPORTANT: This prompt may run in a non-interactive environment.
+## Run mode
+This prompt is running in a non-interactive environment.
 
-Non-interactive rules:
+### Non-interactive rules
 - Do not use AskUserQuestion or any interactive confirmation tool.
 - When an optional choice is needed, pick a reasonable default and record the assumption.
 - Skip optional confirmations and continue directly.
 
-Task: execute a structured `ponytail` task for the selected project.
+## Task
+Execute a structured `ponytail` task for the selected project.
 
-Execution context:
+## Execution context
 - Working directory: `{{projectPath}}`
 {{#if repositoryPath}}- Resolved repository hint: `{{repositoryPath}}`{{/if}}
 - Selected command:
@@ -16,7 +18,7 @@ Execution context:
 {{/each}}
 - Task description: `{{{ponytailQuery}}}`
 
-Command routing:
+### Command routing
 - `lite`, `full`, and `ultra` bind to `/ponytail` with the selected intensity.
 - `review` binds to `/ponytail-review`.
 - `audit` binds to `/ponytail-audit`.
@@ -24,7 +26,7 @@ Command routing:
 - `help` binds to `/ponytail-help`.
 
 {{#if targetScopeMarkdown}}
-Repository scope:
+### Repository scope
 
 {{{targetScopeMarkdown}}}
 {{else}}
@@ -33,13 +35,13 @@ No explicit repository scope markdown was provided. Treat repositories outside t
 
 {{#if targetRepositories}}
 
-Selected repositories:
+### Selected repositories
 {{#each targetRepositories}}
 - `{{displayName}}` at `{{path}}` (access: `{{accessType}}`)
 {{/each}}
 {{/if}}
 
-Requirements:
+## Requirements
 1. Work inside `{{projectPath}}`.
 2. Use the selected ponytail skill and command routing exactly as implied by the command prelude above.
 3. Treat `{{{ponytailQuery}}}` as the execution target.
@@ -49,7 +51,8 @@ Requirements:
 7. Do not ask follow-up questions in non-interactive runs; make a reasonable assumption and record it instead.
 8. Respect critical concerns even under ponytail simplification: trust-boundary validation, data-loss prevention, security controls, and accessibility basics.
 9. If the selected ponytail skill is missing, fail clearly and name the missing skill.
-10. Return a concise execution summary describing the result, assumptions, and scope limitations.
+10. Reply in the user's input language by default; for mixed-language input, follow the last explicit language instruction.
+11. If no writable repository is selected, do read-only analysis only and provide actionable follow-up edit suggestions.
 
 Suggested execution flow:
 1. Inspect the selected repository scope and note which repositories are `write` versus `read`.
@@ -57,3 +60,11 @@ Suggested execution flow:
 3. Execute the task using the ponytail ladder or the focused auxiliary skill workflow.
 4. Keep all modifications inside `write` repositories and leave `read` repositories untouched.
 5. Summarize the result, any assumptions, and any skipped work succinctly.
+
+## Output format
+- Return output in this exact order:
+  1. `## Conclusion`
+  2. `## Assumptions (if any)`
+  3. `## Next step`
+- Write `None` under assumptions when there are none.
+- When assumptions are needed, use this exact format: `Assumption: <one sentence>; Reason: <one sentence>; Impact: <one sentence>`.

@@ -1,23 +1,26 @@
-IMPORTANT: This prompt may run in a non-interactive environment.
+## Run mode
+This prompt is running in a non-interactive environment.
 
-Non-interactive rules:
+### Non-interactive rules
 - Do not use AskUserQuestion or any interactive confirmation tool.
 - When an optional choice is needed, pick a reasonable default and record the assumption.
 - Skip optional confirmations and continue directly.
 
-Task: execute a structured OpenSpec spec compression task for the selected project.
+## Task
+Execute a structured OpenSpec spec compression task for the selected project.
 
-Execution context:
+## Execution context
 - Working directory: `{{projectPath}}`
 {{#if repositoryPath}}- Resolved repository hint: `{{repositoryPath}}`
-{{/if}}- Selected command:
+{{/if}}
+- Selected command:
 {{#each openspecSpecCompressCommandIds}}
   - `{{this}}`
 {{/each}}
 - Compression brief: `{{{compressionBrief}}}`
 
 {{#if targetScopeMarkdown}}
-Repository scope:
+### Repository scope
 
 {{{targetScopeMarkdown}}}
 {{else}}
@@ -26,13 +29,13 @@ No explicit repository scope markdown was provided. Treat repositories outside t
 
 {{#if targetRepositories}}
 
-Selected repositories:
+### Selected repositories
 {{#each targetRepositories}}
 - `{{displayName}}` at `{{path}}` (access: `{{accessType}}`)
 {{/each}}
 {{/if}}
 
-Requirements:
+## Requirements
 1. Work inside `{{projectPath}}`.
 2. Treat `docs/openspec-spec-compression.md` as the authoritative workflow reference for this task.
 3. Restrict OpenSpec asset edits to `openspec/specs/` and `openspec/specs/archive/` unless the user explicitly expands scope.
@@ -47,7 +50,8 @@ Requirements:
 12. Keep file edits restricted to repositories selected with `write` access.
 13. Treat repositories selected with `read` access as read-only context.
 14. Do not ask follow-up questions in non-interactive runs; make a reasonable assumption and record it instead.
-15. Return a concise summary of edits, validation status, assumptions, and any remaining manual-follow-up items.
+15. Reply in the user's input language by default; for mixed-language input, follow the last explicit language instruction.
+16. If no writable repository is selected, do read-only analysis only and provide actionable follow-up edit suggestions.
 
 Suggested execution flow:
 1. Read `docs/openspec-spec-compression.md` and inspect the current `openspec/specs/` state.
@@ -56,3 +60,11 @@ Suggested execution flow:
 4. Apply only the documented mechanical cleanup steps.
 5. Re-run validation after each logical batch so failures trend downward or stay explained.
 6. Summarize what changed, what was intentionally left alone, and which assumptions were used.
+
+## Output format
+- Return output in this exact order:
+  1. `## Conclusion`
+  2. `## Assumptions (if any)`
+  3. `## Next step`
+- Write `None` under assumptions when there are none.
+- When assumptions are needed, use this exact format: `Assumption: <one sentence>; Reason: <one sentence>; Impact: <one sentence>`.

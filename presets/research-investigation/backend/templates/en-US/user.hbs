@@ -1,13 +1,15 @@
-IMPORTANT: This prompt may run in a non-interactive environment.
+## Run mode
+This prompt is running in a non-interactive environment.
 
-Non-interactive rules:
+### Non-interactive rules
 - Do not use AskUserQuestion or any interactive confirmation tool.
 - When an optional choice is needed, pick a reasonable default and record the assumption.
 - Skip optional confirmations and continue directly.
 
-Task: perform a structured code research investigation inside the selected CodeRef vault.
+## Task
+Perform a structured code research investigation inside the selected CodeRef vault.
 
-Execution context:
+## Execution context
 - Working directory: `{{projectPath}}`
 {{#if repositoryPath}}- Resolved target path: `{{repositoryPath}}`{{/if}}
 {{#if targetType}}- Target type: `{{targetType}}`{{/if}}
@@ -19,7 +21,7 @@ Execution context:
 - Research direction: `{{{researchDirection}}}`
 
 {{#if repositoryUrls}}
-Ordered repository inputs:
+### Ordered repository inputs
 {{#each repositoryUrls}}
 - `{{this}}`
 {{/each}}
@@ -28,7 +30,7 @@ No external repository URLs were provided. Analyze the existing contents already
 {{/if}}
 
 {{#if referenceVaults}}
-Reference vaults (read-only evidence sources):
+### Reference vaults (read-only evidence sources)
 {{#each referenceVaults}}
 - `{{name}}` (ID: `{{id}}`, type: `{{type}}`, path: `{{physicalPath}}`)
 {{/each}}
@@ -37,7 +39,7 @@ No additional reference vaults were selected. Use only the output CodeRef vault 
 {{/if}}
 
 {{#if targetProjects}}
-Project references:
+### Project references
 {{#each targetProjects}}
 - `{{name}}` (project ID: `{{projectId}}`, access: `{{accessType}}`, path: `{{physicalPath}}`)
 {{/each}}
@@ -45,7 +47,7 @@ Project references:
 No additional project references were selected.
 {{/if}}
 
-Requirements:
+## Requirements
 1. Work inside `{{projectPath}}`, which is the selected output CodeRef vault root.
 2. Keep repository workspace material under `repos/` and research deliverables under `docs/`.
 3. Treat every reference vault as read-only evidence context. Never switch the final write target away from the selected output CodeRef vault.
@@ -84,7 +86,8 @@ Required runtime workflow:
    - Create or update at least one markdown deliverable in `docs/`.
    - Summarize the investigated scope, findings, evidence, risks, and recommended follow-up actions.
    - Use filenames that make the topic discoverable from the vault.
-5. Return a short execution summary in the session output.
+5. Reply in the user's input language by default; for mixed-language input, follow the last explicit language instruction.
+6. If no writable repository is selected, do read-only analysis only and provide actionable follow-up edit suggestions.
    - Include what was inspected, which repositories were cloned or updated, what documents were written, and any limitations.
 
 Safety constraints:
@@ -94,3 +97,11 @@ Safety constraints:
 - Do not modify project references that are marked `read`. Keep final research deliverables in the selected output CodeRef vault.
 - Do not rewrite large existing docs unless the research task truly requires it; prefer additive or targeted updates.
 - Keep all required output inside the selected output CodeRef vault root.
+
+## Output format
+- Return output in this exact order:
+  1. `## Conclusion`
+  2. `## Assumptions (if any)`
+  3. `## Next step`
+- Write `None` under assumptions when there are none.
+- When assumptions are needed, use this exact format: `Assumption: <one sentence>; Reason: <one sentence>; Impact: <one sentence>`.
