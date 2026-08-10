@@ -176,19 +176,7 @@
         "scope": {
           "$ref": "#/$defs/selectionScope"
         }
-      },
-      "oneOf": [
-        {
-          "required": [
-            "accessType"
-          ]
-        },
-        {
-          "required": [
-            "allowedAccessTypes"
-          ]
-        }
-      ]
+      }
     },
     "selectionScope": {
       "type": "object",

@@ -186,22 +186,28 @@
       }
     },
     "variantEntry": {
-      "allOf": [
-        {
-          "$ref": "#/$defs/variantTemplate"
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "systemTemplate",
+        "userTemplate",
+        "match"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
         },
-        {
-          "type": "object",
-          "required": [
-            "match"
-          ],
-          "properties": {
-            "match": {
-              "$ref": "#/$defs/variantMatch"
-            }
-          }
+        "systemTemplate": {
+          "type": "string"
+        },
+        "userTemplate": {
+          "type": "string"
+        },
+        "match": {
+          "$ref": "#/$defs/variantMatch"
         }
-      ]
+      }
     },
     "variants": {
       "type": "object",

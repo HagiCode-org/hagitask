@@ -21,6 +21,9 @@ repos/hagitask/
       locales.schema.json         # Locale bundle contract
       task-preset.schema.json     # Backend task-preset contract
       prompt-package.schema.json  # Backend prompt package contract
+      store-page-frontmatter.schema.json  # Store-page frontmatter contract
+    community-index-v1.schema.json        # Published /index.json contract
+    community-task-detail-v1.schema.json  # Published /tasks/<taskId>.json contract
   presets/
     <presetTaskId>/
       manifest.json
@@ -39,7 +42,35 @@ repos/hagitask/
         index.zh-CN.md
 ```
 
-## Schema Directory
+## Schema Layers
+
+`schemas/` holds three schema layers. They validate different documents, at different
+points in the pipeline, and are owned by different producers.
+
+| Layer | Schemas | Validates | Produced by |
+| --- | --- | --- | --- |
+| Package schemas | `schemas/task-preset-plugin/*.schema.json` | the JSON files inside a preset or community package (`manifest.json`, `frontend/*`, `backend/*`, `locales/*`) | contributors, by hand |
+| Community discovery schema | `schemas/community-index-v1.schema.json` | the published `/index.json` catalog | `hagitask-site` build |
+| Community detail schema | `schemas/community-task-detail-v1.schema.json` | each published `/tasks/<taskId>.json` document | `hagitask-site` build |
+
+Package schemas describe **authored source**. The community schemas describe
+**generated publication output** and carry fields that do not exist in any package file
+(`generatedAt`, `detailUrl`, `packageUrl`, `integrity.sha256`, and so on). Choosing the
+wrong layer is the most common source of confusion: if you are editing a file inside a
+package directory, the matching contract is always under `schemas/task-preset-plugin/`.
+
+Community packages live in
+[`hagitask-community-packages`](https://github.com/HagiCode-org/hagitask-community-packages).
+That repository mounts HagiTask as a **nested submodule** and consumes these schemas
+directly from `hagitask/schemas/task-preset-plugin/` — it no longer vendors its own copy.
+[`hagitask-site`](https://github.com/HagiCode-org/hagitask-site) in turn mounts the
+community repository as its `community-packages/` submodule, reads task packages from
+`community-packages/data/`, and loads the publication schemas from
+`community-packages/hagitask/schemas`. Shipped presets live in `presets/` in this
+repository. All three — HagiTask presets, community packages, and the site build — use the
+same package schemas from this directory.
+
+## Package `$schema` Reference
 
 `schemas/task-preset-plugin/` is the authoritative home for the JSON schemas that
 validate preset packages. Every shipped and community preset package resolves its
@@ -58,6 +89,61 @@ The shipped preset packages use these relative `$schema` paths from inside
 | `backend/prompts.json`             | `../../../schemas/task-preset-plugin/prompt-package.schema.json`        |
 | `locales/<locale>.json`            | `../../../schemas/task-preset-plugin/locales.schema.json`               |
 
+Community packages use the identical values, so a package can move between
+`presets/<presetTaskId>/` and the community repository without rewriting references.
+
+## Publication Data Flow
+
+```mermaid
+flowchart LR
+    SRC["Community package source<br/>data/&lt;taskId&gt;/manifest.json, frontend/, backend/, locales/, store-page/"]
+    PKG["Package schemas<br/>hagitask/schemas/task-preset-plugin/*.schema.json"]
+    SUB["hagitask-site community-packages/ submodule (nested hagitask)"]
+    NORM["Site build: normalize + digest"]
+    IDX["/index.json"]
+    DET["/tasks/&lt;taskId&gt;.json"]
+    ZIP["/packages/&lt;taskId&gt;.zip"]
+    CIDX["community-index-v1.schema.json"]
+    CDET["community-task-detail-v1.schema.json"]
+
+    PKG -.validates.-> SRC
+    SRC --> SUB --> NORM
+    NORM --> IDX
+    NORM --> DET
+    NORM --> ZIP
+    CIDX -.validates.-> IDX
+    CDET -.validates.-> DET
+```
+
+How source edits reach the published documents:
+
+| Source change | Affected published fields |
+| --- | --- |
+| `manifest.json` → `version` | `version` in index and detail |
+| `manifest.json` → `owner` | `publisher` in index and detail |
+| `backend/task-preset.json` → `requirements` | `requirements` in detail, and the derived `compatibility.agent` / `.skills` / `.cli` in both documents |
+| `store-page/index.<locale>.md` → `title` / `summary` | `name`, `summary`, `description`, and `localization.supportedLocales` |
+| `store-page/index.en-US.md` → `catalog` / `tags` | `category` and `tags` |
+| any file in the package directory | the zip contents, plus `integrity.sha256` in the index and `installation.size` / `installation.sha256` in the detail |
+
+## Generated Output Is Not Editable
+
+`/index.json`, `/tasks/<taskId>.json`, and `/packages/<taskId>.zip` are produced from
+scratch on every site build. They are not stored in any repository as editable source and
+hand edits are discarded on the next publish. The only way to change a published field is
+to change the package file it is derived from.
+
+When schema validation fails:
+
+1. Read which document failed. A `task-preset-plugin` failure points at a package file you
+   authored; a `community-index-v1` or `community-task-detail-v1` failure means the site
+   build normalized your source into something that violates the publication contract.
+2. Fix the source package file. Do not relax `$schema`, delete the `$schema` reference,
+   skip validation, or patch the generated output.
+3. Re-run the site build to confirm the fix.
+4. If the package data is genuinely correct and the schema is wrong, change the schema
+   **here**, in this repository, as a deliberate contract change.
+
 ## Preset Package Directory
 
 `presets/` is the root for preset-task packages. Each package lives in its own
@@ -68,14 +154,13 @@ HagiTask-specific adapter.
 
 Currently shipped packages:
 
-- `claude-md-update`
-- `goal`
-- `last30days`
 - `normal-session`
-- `openspec-spec-compress`
-- `ponytail`
 - `research-investigation`
-- `ui-master`
+
+`claude-md-update`, `goal`, `last30days`, `openspec-spec-compress`, `ponytail`, and
+`ui-master` are published as community tasks and live in
+[`hagitask-community-packages`](https://github.com/HagiCode-org/hagitask-community-packages),
+not in `presets/`.
 
 ## Source-of-Truth Ownership
 
@@ -101,3 +186,8 @@ must keep the `hagicode-core` runtime copy synchronized with the canonical HagiT
    `frontend/panel.json`, `backend/task-preset.json`, `backend/prompts.json`,
    locale bundles, locale prompt templates, and `store-page/` content.
 4. Validate each JSON file against its schema before submitting.
+
+To publish a **community** task instead of a shipped preset, create the package in
+[`hagitask-community-packages`](https://github.com/HagiCode-org/hagitask-community-packages#contribute-a-task).
+Its README has the step-by-step directory, canonical ID, `$schema`, validation, and Pull
+Request workflow. The package layout and `$schema` rules above apply there unchanged.

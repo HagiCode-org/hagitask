@@ -31,6 +31,9 @@
     "version": {
       "type": "string"
     },
+    "icon": {
+      "type": "string"
+    },
     "displayName": {
       "$ref": "#/$defs/localizedKey"
     },
