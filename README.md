@@ -179,15 +179,14 @@ must keep the `hagicode-core` runtime copy synchronized with the canonical HagiT
 
 ## Contributing a Preset Package
 
-1. Create `presets/<presetTaskId>/` with the loader-compatible layout shown above.
-2. Point every JSON file's `$schema` at `../../schemas/task-preset-plugin/...`
-   (or `../../../schemas/...` for files inside `frontend/`, `backend/`, `locales/`).
-3. Include the full runtime resource set the backend needs: `manifest.json`,
-   `frontend/panel.json`, `backend/task-preset.json`, `backend/prompts.json`,
-   locale bundles, locale prompt templates, and `store-page/` content.
-4. Validate each JSON file against its schema before submitting.
+HagiTask owns the Schema and shipped preset source. Preset packages use the loader-compatible
+layout described above and must keep their JSON resources aligned with
+`schemas/task-preset-plugin/`. Validate authored files against those schemas before submitting.
 
-To publish a **community** task instead of a shipped preset, create the package in
-[`hagitask-community-packages`](https://github.com/HagiCode-org/hagitask-community-packages#contribute-a-task).
-Its README has the step-by-step directory, canonical ID, `$schema`, validation, and Pull
-Request workflow. The package layout and `$schema` rules above apply there unchanged.
+For the user-facing walkthrough covering package creation, locale and store-page resources,
+validation, semantic versioning, and Pull Requests, see the
+[HagiTask community guide](https://docs.hagicode.com/guides/hagitask/community/). A community
+task belongs in
+[`hagitask-community-packages`](https://github.com/HagiCode-org/hagitask-community-packages),
+not in this repository. This README remains the technical reference for Schema ownership,
+preset source data, and the transitional runtime copy.
