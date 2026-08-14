@@ -84,6 +84,26 @@
     },
     "variants": {
       "$ref": "#/$defs/variants"
+    },
+    "commandSystemPrompts": {
+      "type": "object",
+      "description": "Optional mapping from command ids to locale-specific system prompt template resources.",
+      "propertyNames": {
+        "type": "string",
+        "pattern": "\\S"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "minProperties": 1,
+        "propertyNames": {
+          "type": "string",
+          "pattern": "\\S"
+        },
+        "additionalProperties": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
     }
   },
   "$defs": {
