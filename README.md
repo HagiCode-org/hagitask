@@ -89,6 +89,27 @@ The shipped preset packages use these relative `$schema` paths from inside
 | `backend/prompts.json`             | `../../../schemas/task-preset-plugin/prompt-package.schema.json`        |
 | `locales/<locale>.json`            | `../../../schemas/task-preset-plugin/locales.schema.json`               |
 
+Prompt packages may optionally declare `commandSystemPrompts`, mapping a command id
+to locale-specific system-template paths:
+
+```json
+{
+  "commandSystemPrompts": {
+    "initialize": {
+      "en-US": "./templates/en-US/commands/initialize.md",
+      "zh-CN": "./templates/zh-CN/commands/initialize.md"
+    }
+  }
+}
+```
+
+The selected command template is rendered with the same context as the user and
+base system templates. Locale resolution uses an exact match, then the language
+portion, then the package default locale. Missing mappings, blank commands, and
+legacy packages simply omit the additional system section. Final prompt order is
+user prompt, command-specific system prompt, then base system prompt; existing
+command preludes remain supported.
+
 Community packages use the identical values, so a package can move between
 `presets/<presetTaskId>/` and the community repository without rewriting references.
 
