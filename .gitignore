@@ -1,1 +1,4 @@
 ~/.omp/
+node_modules/
+dist/
+.test-fixture-*/
