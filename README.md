@@ -178,7 +178,7 @@ Currently shipped packages:
 - `normal-session`
 - `research-investigation`
 
-`claude-md-update`, `goal`, `last30days`, `openspec-spec-compress`, `ponytail`, and
+`agents-md-update`, `goal`, `last30days`, `openspec-spec-compress`, `ponytail`, and
 `ui-master` are published as community tasks and live in
 [`hagitask-community-packages`](https://github.com/HagiCode-org/hagitask-community-packages),
 not in `presets/`.
