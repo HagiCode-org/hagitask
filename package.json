@@ -1,0 +1,7 @@
+{
+  "name": "@hagicode/hagitask",
+  "private": true,
+  "scripts": {
+    "validate": "python3 scripts/validate.py"
+  }
+}
