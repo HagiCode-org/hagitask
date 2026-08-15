@@ -92,10 +92,6 @@ jobs:
       - name: Verify package contents
         run: npm pack --dry-run
 
-      - name: Check npm auth secret
-        if: ${{ secrets.NPM_TOKEN == '' }}
-        run: echo "NPM_TOKEN is not configured; skipping npm publish for this run."
-
       - name: Publish to npm
         env:
           NPM_CONFIG_PROVENANCE: "true"
