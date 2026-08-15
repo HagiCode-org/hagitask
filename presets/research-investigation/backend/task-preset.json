@@ -3,6 +3,24 @@
   "taskKey": "researchInvestigation",
   "scriptKey": "autotask.research-investigation",
   "defaultTargetType": "vault",
+  "execution": {
+    "schemaVersion": "1.0",
+    "strategy": "declarative"
+  },
+  "compatibility": {
+    "deprecatedInputs": [
+      {
+        "legacy": "ResearchDirection",
+        "binding": "researchDirection",
+        "diagnosticCode": "legacy-input-mapped"
+      },
+      {
+        "legacy": "RepositoryUrls",
+        "binding": "repositoryUrls",
+        "diagnosticCode": "legacy-input-mapped"
+      }
+    ]
+  },
   "requirements": [
     {
       "type": "agent",
@@ -25,12 +43,22 @@
       "input": "researchDirection",
       "promptParameter": "researchDirection",
       "metadataKey": "autoTaskResearchDirection",
-      "required": true
+      "required": true,
+      "valueType": "text",
+      "transform": "trim",
+      "aliases": [
+        "ResearchDirection"
+      ]
     },
     {
       "input": "repositoryUrls",
       "promptParameter": "repositoryUrls",
-      "metadataKey": "autoTaskResearchRepositoryUrls"
+      "metadataKey": "autoTaskResearchRepositoryUrls",
+      "valueType": "multiple",
+      "transform": "url-list",
+      "aliases": [
+        "RepositoryUrls"
+      ]
     }
   ]
 }
