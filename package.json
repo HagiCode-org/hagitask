@@ -24,6 +24,14 @@
   "engines": {
     "node": ">=20"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HagiCode-org/hagitask.git"
+  },
+  "homepage": "https://github.com/HagiCode-org/hagitask",
+  "bugs": {
+    "url": "https://github.com/HagiCode-org/hagitask/issues"
+  },
   "publishConfig": {
     "access": "public"
   },
