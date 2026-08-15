@@ -59,14 +59,8 @@ jobs:
       - name: Verify package contents
         run: npm pack --dry-run
 
-      - name: Check npm auth secret
-        if: ${{ secrets.NPM_TOKEN == '' }}
-        run: echo "NPM_TOKEN is not configured; skipping npm publish for this run."
-
       - name: Publish dev version to npm
-        if: ${{ secrets.NPM_TOKEN != '' }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: "true"
         run: npm publish --tag dev --access public --provenance
 
@@ -103,8 +97,6 @@ jobs:
         run: echo "NPM_TOKEN is not configured; skipping npm publish for this run."
 
       - name: Publish to npm
-        if: ${{ secrets.NPM_TOKEN != '' }}
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: "true"
         run: npm publish --access public --provenance
