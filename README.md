@@ -4,6 +4,25 @@ HagiTask is the canonical repository for preset-task contribution assets inside 
 HagiCode monorepo. It is the maintained source of truth for shipped preset-task
 schemas and preset packages.
 
+## npm CLI
+
+The repository is also published as `@hagicode/hagitask` (Node.js 20 or newer).
+Install it with `npm install --save-dev @hagicode/hagitask`, then validate a
+repository or one package:
+
+```bash
+npx hagitask validate .
+npx hagitask validate ./data/my-task --json
+```
+
+`validate` discovers packages directly under `presets/` and `data/`, or validates
+a directory containing `manifest.json`. It returns exit code `0` only when all
+discovered packages pass. Human-readable diagnostics are printed by default;
+`--json` prints the stable `{ packages, errors, valid }` result on stdout for CI.
+Validation reads `schemas/` shipped inside the npm package (and never requires a
+network connection). The CLI is the new reusable validator; Contrib and Community
+Packages retain their existing workflows until a separate migration.
+
 > Authoring location: contributors add and update preset-task packages **here**, in
 > `repos/hagitask`, not in `repos/hagicode-core/src/PCode.Web/plugins/task-presets/`.
 > The `hagicode-core` copy is a transitional asset that is kept only until the backend
