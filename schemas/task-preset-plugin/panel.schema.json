@@ -101,6 +101,15 @@
         "inputType": {
           "type": "string"
         },
+        "valueType": {
+          "type": "string",
+          "enum": [
+            "text",
+            "boolean",
+            "single",
+            "multiple"
+          ]
+        },
         "label": {
           "$ref": "#/$defs/localizedKey"
         },
@@ -140,6 +149,25 @@
             },
             "vaultType": {
               "type": "string"
+            },
+            "options": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "value",
+                  "label"
+                ],
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "$ref": "#/$defs/localizedKey"
+                  }
+                }
+              }
             }
           },
           "additionalProperties": true
