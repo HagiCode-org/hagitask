@@ -202,7 +202,16 @@ must keep the `hagicode-core` runtime copy synchronized with the canonical HagiT
 
 HagiTask owns the Schema and shipped preset source. Preset packages use the loader-compatible
 layout described above and must keep their JSON resources aligned with
-`schemas/task-preset-plugin/`. Validate authored files against those schemas before submitting.
+`schemas/task-preset-plugin/`. Validate authored files against those schemas before submitting:
+
+```bash
+npm run validate
+```
+
+The validator checks every shipped preset, all manifest resource references, package
+JSON schemas, prompt template references, and compatibility binding aliases. It is
+intentionally package-local so the same command can run in a clean checkout without
+depending on Core or site-generated output.
 
 For the user-facing walkthrough covering package creation, locale and store-page resources,
 validation, semantic versioning, and Pull Requests, see the
