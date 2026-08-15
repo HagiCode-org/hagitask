@@ -86,6 +86,23 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Resolve release version
+        id: version
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name || github.ref_name }}
+        run: |
+          version="${RELEASE_TAG#v}"
+          if [ -z "$version" ] || [ "$version" = "$RELEASE_TAG" ]; then
+            version="$(node -p "require('./package.json').version")"
+          fi
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          echo "Resolved release version: ${version}"
+
+      - name: Stamp release version
+        env:
+          RELEASE_VERSION: ${{ steps.version.outputs.version }}
+        run: npm version --no-git-tag-version --allow-same-version "$RELEASE_VERSION"
+
       - name: Build package
         run: npm run build
 

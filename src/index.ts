@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { discoverPackages } from './validation/package-discovery.js';
@@ -5,8 +6,18 @@ import { validateDiscoveredPackages } from './validation/package-validator.js';
 export type { DiscoveredPackage, DiscoveryResult } from './validation/package-discovery.js';
 export type { ValidationError, ValidationResult } from './validation/diagnostics.js';
 
+function readPackageVersion(): string {
+  try {
+    const packagePath = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'package.json');
+    const version = JSON.parse(readFileSync(packagePath, 'utf8')).version;
+    return typeof version === 'string' ? version : '0.1.0';
+  } catch {
+    return '0.1.0';
+  }
+}
+
 export const PACKAGE_NAME = '@hagicode/hagitask';
-export const PACKAGE_VERSION = '0.1.0';
+export const PACKAGE_VERSION = readPackageVersion();
 export const packageMetadata = {
   name: PACKAGE_NAME,
   version: PACKAGE_VERSION,
