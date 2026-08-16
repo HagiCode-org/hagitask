@@ -3,6 +3,7 @@ import { Command } from 'commander';
 import { readFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runNewCommand, type NewCommandOptions } from './commands/new-command.js';
 import { runValidateCommand } from './commands/validate-command.js';
 
 function packageVersion(): string {
@@ -20,6 +21,18 @@ export function createCli(): Command {
     .name('hagitask')
     .description('Validate HagiTask preset and community packages offline.')
     .version(packageVersion());
+  program
+    .command('new <packageName>')
+    .description('create a new HagiTask package scaffold')
+    .option('-d, --target <path>', 'target package directory')
+    .option('--destination <path>', 'alias for --target')
+    .option('--output <path>', 'alias for --target')
+    .option('-r, --repository <repositories...>', 'repository identifier(s) to offer in the selector')
+    .action((packageName: string, options: NewCommandOptions) => {
+      const result = runNewCommand(packageName, options);
+      if (result.error) console.error(result.error);
+      process.exitCode = result.code;
+    });
   program
     .command('validate [path]')
     .description('validate packages under presets/, data/, or a single package directory')

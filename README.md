@@ -15,6 +15,25 @@ npx hagitask validate .
 npx hagitask validate ./data/my-task --json
 ```
 
+Create a new package scaffold without network access:
+
+```bash
+npx hagitask new my-task
+npx hagitask new my-task --target ./data/my-task --repository repos/web repos/hagicode-core
+```
+
+The target directory must be empty (or absent), and package names use lowercase
+letters, numbers, and hyphens. `--target` selects the exact package directory (its final directory name must match the package name);
+`--destination` and `--output` are aliases. `--repository` may be repeated or
+followed by multiple identifiers and only populates the repository selector
+options; commands still require an explicit `targetRepositories` selection.
+
+Generated packages contain `manifest.json`, `frontend/`, `backend/`, bilingual
+`locales/`, `store-page/`, and `commands/README.md`. The baseline commands
+`what is this` explain a selected repository, while `what is next` recommends
+improvements. Add command definitions in `frontend/commands.json` and matching
+localized prompt files in `backend/templates/<locale>/commands/`.
+
 `validate` discovers packages directly under `presets/` and `data/`, or validates
 a directory containing `manifest.json`. It returns exit code `0` only when all
 discovered packages pass. Human-readable diagnostics are printed by default;
