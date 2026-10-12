@@ -151,6 +151,48 @@ command preludes remain supported.
 Community packages use the identical values, so a package can move between
 `presets/<presetTaskId>/` and the community repository without rewriting references.
 
+## Well-Known Input: `omitNonInteractiveHints`
+
+`omitNonInteractiveHints` is a reserved, optional, boolean system input for prompt
+packages. It tells the template whether interactive control is enabled for the agent CLI
+that runs the task. A package that wants to follow the switch declares the input in
+`backend/prompts.json`:
+
+```json
+{
+  "name": "omitNonInteractiveHints",
+  "source": "system",
+  "required": false,
+  "description": "Optional. True when interactive control is enabled for the agent CLI running this prompt."
+}
+```
+
+and gates its run-mode declaration in each template that carries one:
+
+```handlebars
+{{#unless omitNonInteractiveHints}}
+## Run mode
+This prompt is running in a non-interactive environment.
+{{/unless}}
+```
+
+- **What to gate.** The whole run-mode section: the "non-interactive" declaration, its
+  prohibitions of interactive tools or follow-up questions, and the default-choice rules
+  written inside it. Keep everything outside that section, including scope boundaries,
+  output format, and inline body requirements such as "if details are missing, make a
+  reasonable assumption". A statement that the package's own requirements demand (for
+  example "do not claim extra skills configuration is required") may stay under an
+  `{{else}}` branch with a neutral heading.
+- **Absent means today's prompt.** A value that is absent, or `false`, renders exactly the
+  prompt that existed before the gate. A package that never references the input renders
+  the same way with any value.
+- **The backend supplies the value.** The host reads the stored interactive-control entry
+  of the agent CLI that runs the task and passes it at render time. It is not a creation
+  parameter: package panels, `inputBindings` and create requests must not declare or send it.
+  Packages that adopt the input should keep it out of their panel and binding definitions.
+- **Wording only.** The switch never changes which runs may ask the user a question. It
+  only decides whether the gated run-mode text is rendered.
+
 ## Publication Data Flow
 
 ```mermaid
