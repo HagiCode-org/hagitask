@@ -44,7 +44,7 @@ Start a normal chat session using the provided scope and user input below.
 2. Use the provided repository scope, vault references, and project references as the authoritative context boundary for your work.
 3. Do not claim that extra skills configuration is required.
 4. Do not claim that extra CLI parameters are required.
-5. If the scope is incomplete, make a reasonable assumption and state it explicitly instead of asking a follow-up question.
+5. If the scope is incomplete, make a reasonable assumption and state it explicitly{{#unless omitNonInteractiveHints}} instead of asking a follow-up question{{/unless}}.
 6. Keep repository edits restricted to repositories explicitly selected with write access.
 7. Treat read-only repositories, reference vaults, and project references as supporting context.
 8. Reply in the user's input language by default; for mixed-language input, follow the last explicit language instruction.
