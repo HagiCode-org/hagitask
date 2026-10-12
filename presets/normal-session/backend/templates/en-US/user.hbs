@@ -1,8 +1,12 @@
+{{#unless omitNonInteractiveHints}}
 ## Run mode
 This prompt is running in a non-interactive environment.
 
 ### Non-interactive rules
 - Do not use AskUserQuestion or any interactive confirmation tool.
+{{else}}
+## Session rules
+{{/unless}}
 - Do not require extra skills configuration for this session.
 - Do not require extra CLI arguments for this session.
 - When details are missing but not critical, make a reasonable assumption from the provided scope and record that assumption in the response.
