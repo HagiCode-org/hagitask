@@ -6,7 +6,7 @@ schemas and preset packages.
 
 ## npm CLI
 
-The repository is also published as `@hagicode/hagitask` (Node.js 20 or newer).
+The repository is also published as `@hagicode/hagitask` (Node.js 24 or newer).
 Install it with `npm install --save-dev @hagicode/hagitask`, then validate a
 repository or one package:
 
