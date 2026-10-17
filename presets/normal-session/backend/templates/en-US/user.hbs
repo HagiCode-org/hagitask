@@ -49,14 +49,17 @@ Start a normal chat session using the provided scope and user input below.
 7. Treat read-only repositories, reference vaults, and project references as supporting context.
 8. Reply in the user's input language by default; for mixed-language input, follow the last explicit language instruction.
 9. If no writable repository is selected, do read-only analysis only and provide actionable follow-up edit suggestions.
-10. When you make assumptions, use this exact format: `Assumption: <one sentence>; Reason: <one sentence>; Impact: <one sentence>`. 
+10. When you make assumptions, record each one under `## Assumptions (if any)` using the nested `**Assumption:**` / `**Reason:**` / `**Impact:**` shape from the output format below.
 
 ## Output format
-- Output in this exact order:
-  1. `## Conclusion`
-  2. `## Assumptions (if any)`
-  3. `## Next step`
-- If there are no assumptions, write `None` under `## Assumptions (if any)`.
+- Return output in this exact order, using these level-2 headings: `## Conclusion`, `## Assumptions (if any)`, `## Next step`.
+- `## Conclusion`: start with one bold sentence that states the outcome. Follow with at most 5 bullets of key facts. Write paths, commands, and identifiers as inline code. Use a table only for real comparisons.
+- `## Assumptions (if any)`: write one list item per assumption in this shape:
+  - **Assumption:** <one sentence>
+    - **Reason:** <one sentence>
+    - **Impact:** <one sentence>
+  Write `None` under the heading when there are no assumptions.
+- `## Next step`: use an ordered list with the recommended action first, and start each item with a bold action phrase. If there is only one follow-up, write one sentence.
 
 ## User input
 
