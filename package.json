@@ -28,12 +28,29 @@
     "type": "git",
     "url": "git+https://github.com/HagiCode-org/hagitask.git"
   },
-  "homepage": "https://github.com/HagiCode-org/hagitask",
+  "homepage": "https://github.com/HagiCode-org/hagitask#readme",
   "bugs": {
     "url": "https://github.com/HagiCode-org/hagitask/issues"
   },
+  "keywords": [
+    "hagicode",
+    "hagicode-org",
+    "hagitask",
+    "preset-task",
+    "schema",
+    "validation",
+    "json-schema",
+    "cli",
+    "openspec"
+  ],
+  "author": {
+    "name": "HagiCode",
+    "url": "https://github.com/HagiCode-org"
+  },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "provenance": true,
+    "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
