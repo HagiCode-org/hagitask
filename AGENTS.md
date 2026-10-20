@@ -33,7 +33,6 @@ Validate authored package files against the matching schema. Keep `$schema` refe
 - Preserve the shared package layout and both supported locale bundles. A shipped preset has `manifest.json`, `backend/` (`task-preset.json`, `prompts.json`, `templates/<locale>/system.md` + `user.hbs`), `frontend/panel.json`, `locales/<locale>.json` (en-US, zh-CN), and `store-page/index.<locale>.md`.
 - Prompt template edits (`system.md`, `user.hbs`) must be mirrored in both `en-US` and `zh-CN` templates in the same change.
 - Put reusable package source here only when it is a shipped preset; public community tasks belong in the community repository.
-- Do not hand-edit generated indexes, task details, archives, or build output.
 
 ## Deployment and Integration
 
