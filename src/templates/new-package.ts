@@ -168,6 +168,18 @@ export function createNewPackageFiles(context: NewPackageTemplateContext): NewPa
             required: true,
             description: 'One or more explicitly selected repository identifiers.',
           },
+          {
+            name: 'targetRepositoriesSelectAll',
+            source: 'computed-context',
+            required: false,
+            description: 'Optional. True when the repository scope is the resolved select-all state; absent or false means an explicit list.',
+          },
+          {
+            name: 'targetRepositoriesScopeAccess',
+            source: 'computed-context',
+            required: false,
+            description: 'Optional. Access of the resolved select-all scope: write or read. Present only when targetRepositoriesSelectAll is true.',
+          },
         ],
         rendering: { strictVariables: true, trimBlocks: true },
         locales: {
