@@ -30,8 +30,9 @@ Validate authored package files against the matching schema. Keep `$schema` refe
 ## Conventions
 
 - Keep the directory name, `manifest.json.taskPresetId`, and package references consistent.
-- Preserve the shared package layout and both supported locale bundles. A shipped preset has `manifest.json`, `backend/` (`task-preset.json`, `prompts.json`, `templates/<locale>/system.md` + `user.hbs`), `frontend/panel.json`, `locales/<locale>.json` (en-US, zh-CN), and `store-page/index.<locale>.md`.
+- Preserve the shared package layout and both supported locale bundles. A shipped preset has `manifest.json`, `backend/` (`task-preset.json`, `prompts.json`, `templates/<locale>/system.md` + `user.hbs`), `frontend/panel.json` (plus optional `frontend/commands.json` with prompts in `backend/templates/<locale>/commands/`), `locales/<locale>.json` (en-US, zh-CN), and `store-page/index.<locale>.md`.
 - Prompt template edits (`system.md`, `user.hbs`) must be mirrored in both `en-US` and `zh-CN` templates in the same change.
+- `omitNonInteractiveHints` is a host-supplied system prompt input that only gates the run-mode wording; declare it in `backend/prompts.json` if a template uses it, but never in panels, `inputBindings` or create requests (see `README.md`).
 - Put reusable package source here only when it is a shipped preset; public community tasks belong in the community repository.
 
 ## Deployment and Integration
