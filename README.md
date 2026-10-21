@@ -198,6 +198,46 @@ This prompt is running in a non-interactive environment.
 - **Wording only.** The switch never changes which runs may ask the user a question. It
   only decides whether the gated run-mode text is rendered.
 
+## Well-Known Computed Inputs: `targetRepositoriesSelectAll` and `targetRepositoriesScopeAccess`
+
+When a session's repository scope is the select-all state ("every repository of the
+project", editable or read-only), the backend resolves it against the project's current
+repositories at render time and passes two computed-context values to the template:
+
+| Input                            | Value                                                                                          |
+|----------------------------------|------------------------------------------------------------------------------------------------|
+| `targetRepositoriesSelectAll`    | `true` only when a select-all state was resolved for the session. `false` for an explicit list. |
+| `targetRepositoriesScopeAccess`  | `write` (editable) or `read` (read-only) for the resolved scope. Present only when the flag is `true`. |
+
+A package that wants to state the scope declares both in `backend/prompts.json`:
+
+```json
+{
+  "name": "targetRepositoriesSelectAll",
+  "source": "computed-context",
+  "required": false,
+  "description": "Optional. True when the repository scope is the resolved select-all state; absent or false means an explicit list."
+},
+{
+  "name": "targetRepositoriesScopeAccess",
+  "source": "computed-context",
+  "required": false,
+  "description": "Optional. Access of the resolved select-all scope: write or read. Present only when targetRepositoriesSelectAll is true."
+}
+```
+
+- **What the values mean.** When the flag is `true`, `targetRepositories` already holds the
+  full resolved set and `targetScopeMarkdown` is recomputed from it, so a template only
+  needs the flag to say that the scope is all repositories. The list is not a snapshot.
+- **What to gate.** Wrap any all-repositories wording in `{{#if targetRepositoriesSelectAll}}`
+  and read the access value only inside that gate. An explicit-list session renders the
+  same prompt it rendered before.
+- **Packages with `strictVariables: true`.** The backend supplies `false` for an explicit
+  list, so the flag is always present for those packages. Packages with
+  `strictVariables: false` may ignore the flag entirely.
+- **The backend supplies the values.** They are not creation parameters: package panels,
+  `inputBindings` and create requests must not declare or send them.
+
 ## Publication Data Flow
 
 ```mermaid
