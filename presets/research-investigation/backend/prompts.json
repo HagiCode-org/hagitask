@@ -74,7 +74,7 @@
     {
       "name": "referenceVaults",
       "source": "computed-context",
-      "description": "Optional read-only reference vault summaries resolved from the preset selection."
+      "description": "Optional reference vault summaries resolved from the preset selection, each with an accessType of read or write."
     },
     {
       "name": "targetProjects",

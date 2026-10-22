@@ -32,9 +32,9 @@ No external repository URLs were provided. Analyze the existing contents already
 {{/if}}
 
 {{#if referenceVaults}}
-### Reference vaults (read-only evidence sources)
+### Reference vaults
 {{#each referenceVaults}}
-- `{{name}}` (ID: `{{id}}`, type: `{{type}}`, path: `{{physicalPath}}`)
+- `{{name}}` (ID: `{{id}}`, type: `{{type}}`, access: `{{accessType}}`, path: `{{physicalPath}}`)
 {{/each}}
 {{else}}
 No additional reference vaults were selected. Use only the output CodeRef vault contents and any repository inputs above.
@@ -52,7 +52,7 @@ No additional project references were selected.
 ## Requirements
 1. Work inside `{{projectPath}}`, which is the selected output CodeRef vault root.
 2. Keep repository workspace material under `repos/` and research deliverables under `docs/`.
-3. Treat every reference vault as read-only evidence context. Never switch the final write target away from the selected output CodeRef vault.
+3. Treat reference vaults with `read` access as read-only evidence context. Reference vaults with `write` access may be updated only when the investigation explicitly requires coordinated notes or changes. Never switch the final write target away from the selected output CodeRef vault.
 4. Treat project references with `read` access as read-only evidence. Project references with `write` access may be updated only when the investigation explicitly requires coordinated notes or changes.
 5. Do not write final deliverables outside the selected output CodeRef vault root.
 6. Base every conclusion on inspected local evidence. Do not invent repository facts.
@@ -77,7 +77,7 @@ Required runtime workflow:
    - Trace the modules, dependencies, flows, and risk areas needed to answer the research direction.
    - If multiple repositories are involved, identify how they relate to each other.
 {{#if referenceVaults}}
-   - Review each selected reference vault as read-only supporting evidence and cite which vault informed each key conclusion when it matters.
+   - Review each selected reference vault as supporting evidence, respect its declared access, and cite which vault informed each key conclusion when it matters.
 {{/if}}
 {{#if targetProjects}}
    - Review each selected project reference and respect its declared access mode.
@@ -95,7 +95,7 @@ Required runtime workflow:
 Safety constraints:
 - Do not rely on interactive authentication flows.
 - If a repository cannot be cloned or updated, continue with the remaining available evidence and report the exact failure.
-- Do not modify reference vault contents. They are read-only context for this run.
+- Do not modify reference vaults marked `read`. Reference vaults marked `write` may be updated only when the investigation explicitly requires it.
 - Do not modify project references that are marked `read`. Keep final research deliverables in the selected output CodeRef vault.
 - Do not rewrite large existing docs unless the research task truly requires it; prefer additive or targeted updates.
 - Keep all required output inside the selected output CodeRef vault root.

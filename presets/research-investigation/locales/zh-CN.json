@@ -15,7 +15,7 @@
     "taskNameHint": "可选。留空时会使用这个预设的默认会话标题。",
     "taskNamePlaceholder": "preset-task 调研迁移审计",
     "vaultScopeLabel": "Vault 范围 *",
-    "vaultScopeHint": "选择 1 个 CodeRef 输出 Vault，并在同一个选择器里按需附加参考 Vault。",
+    "vaultScopeHint": "选择 1 个 CodeRef 输出 Vault，并在同一个选择器里按需附加参考 Vault（可设为只读或可编辑）。",
     "vaultEmptyTitle": "当前没有可用的 CodeRef Vault",
     "vaultEmptyDescription": "请先注册一个 CodeRef Vault，然后再回来创建调研会话。",
     "vaultRequiredMessage": "开始调研前请先选择 1 个 CodeRef Vault 作为输出目标。",

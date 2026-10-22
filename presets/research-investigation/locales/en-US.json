@@ -15,7 +15,7 @@
     "taskNameHint": "Optional. Leave empty to use the preset default title for this queued research session.",
     "taskNamePlaceholder": "Preset-task migration audit",
     "vaultScopeLabel": "Vault scope *",
-    "vaultScopeHint": "Choose one CodeRef output vault and optionally attach reference vaults in the same selector.",
+    "vaultScopeHint": "Choose one CodeRef output vault and optionally attach reference vaults, read-only or editable, in the same selector.",
     "vaultEmptyTitle": "No CodeRef vaults are available",
     "vaultEmptyDescription": "Register a CodeRef vault first, then return here to start a research session.",
     "vaultRequiredMessage": "Select one CodeRef Vault as the output target before starting research.",
