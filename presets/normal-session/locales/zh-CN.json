@@ -18,7 +18,7 @@
     "repositoryAccessHint": "可选。选择本次会话应关注的可写或只读仓库，作为上下文边界。",
     "repositoryAccessEmpty": "当前项目还没有可用仓库。",
     "referenceVaultsLabel": "Vault 范围",
-    "referenceVaultsHint": "可选。把 Vault 作为只读参考上下文附加进来，用于复用笔记、片段或既有探索结果。",
+    "referenceVaultsHint": "可选。把 Vault 作为上下文附加进来，用于复用笔记、片段或既有探索结果；每个 Vault 可设为只读或可编辑。",
     "vaultEmptyTitle": "当前还没有可用 Vault",
     "vaultEmptyDescription": "如果本次会话需要复用 Vault 上下文，请先注册 Vault。",
     "projectReferencesLabel": "项目引用",

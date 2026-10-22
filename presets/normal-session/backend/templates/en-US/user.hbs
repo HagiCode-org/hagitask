@@ -26,9 +26,9 @@ Start a normal chat session using the provided scope and user input below.
 {{/if}}
 
 {{#if referenceVaults}}
-### Reference vaults
+### Vaults
 {{#each referenceVaults}}
-- `{{name}}` (`{{type}}`) at `{{physicalPath}}`
+- `{{name}}` (`{{type}}`) at `{{physicalPath}}` (access: `{{accessType}}`)
 {{/each}}
 {{/if}}
 
@@ -45,8 +45,8 @@ Start a normal chat session using the provided scope and user input below.
 3. Do not claim that extra skills configuration is required.
 4. Do not claim that extra CLI parameters are required.
 5. If the scope is incomplete, make a reasonable assumption and state it explicitly{{#unless omitNonInteractiveHints}} instead of asking a follow-up question{{/unless}}.
-6. Keep repository edits restricted to repositories explicitly selected with write access.
-7. Treat read-only repositories, reference vaults, and project references as supporting context.
+6. Keep repository edits restricted to repositories explicitly selected with write access, and vault edits restricted to vaults listed with `write` access.
+7. Treat read-only repositories, read-only vaults, and project references as supporting context.
 8. Reply in the user's input language by default; for mixed-language input, follow the last explicit language instruction.
 9. If no writable repository is selected, do read-only analysis only and provide actionable follow-up edit suggestions.
 10. When you make assumptions, record each one under `## Assumptions (if any)` using the nested `**Assumption:**` / `**Reason:**` / `**Impact:**` shape from the output format below.

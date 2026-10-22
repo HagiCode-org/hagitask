@@ -44,7 +44,7 @@
     {
       "name": "referenceVaults",
       "source": "computed-context",
-      "description": "Optional selected reference vaults."
+      "description": "Optional attached vaults, each with an accessType of read or write."
     },
     {
       "name": "targetProjects",

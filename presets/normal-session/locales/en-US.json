@@ -18,7 +18,7 @@
     "repositoryAccessHint": "Optionally select writable and read-only repositories that should define the session boundary.",
     "repositoryAccessEmpty": "No repositories are available for the selected project yet.",
     "referenceVaultsLabel": "Vault scope",
-    "referenceVaultsHint": "Optionally attach vaults as reference-only context for notes, snippets, or previous explorations.",
+    "referenceVaultsHint": "Optionally attach vaults as context for notes, snippets, or previous explorations. Each vault can be read-only or editable.",
     "vaultEmptyTitle": "No vaults are available yet",
     "vaultEmptyDescription": "Register a vault first if this session should reuse vault context.",
     "projectReferencesLabel": "Project references",
