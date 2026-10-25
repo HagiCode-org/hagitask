@@ -53,7 +53,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "export NODE_OPTIONS=\"${NODE_OPTIONS:-} --max-old-space-size=4096\"; tsc -p tsconfig.json",
     "test": "npm run build && node --test test/*.test.mjs",
     "validate": "npm run build && node dist/cli.js validate .",
     "clean": "rm -rf dist"
