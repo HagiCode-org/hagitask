@@ -4,12 +4,8 @@ This prompt is running in a non-interactive environment.
 
 ### Non-interactive rules
 - Do not use AskUserQuestion, ask_user or any interactive confirmation tool.
-{{else}}
-## Session rules
-{{/unless}}
-- Do not require extra skills configuration for this session.
-- Do not require extra CLI arguments for this session.
 - When details are missing but not critical, make a reasonable assumption from the provided scope and record that assumption in the response.
+{{/unless}}
 
 ## Task
 Start a normal chat session using the provided scope and user input below.
@@ -40,16 +36,10 @@ Start a normal chat session using the provided scope and user input below.
 {{/if}}
 
 ## Requirements
-1. Treat this as a regular chat session kickoff, not as background auto-task dispatch.
-2. Use the provided repository scope, vault references, and project references as the authoritative context boundary for your work.
-3. Do not claim that extra skills configuration is required.
-4. Do not claim that extra CLI parameters are required.
-5. If the scope is incomplete, make a reasonable assumption and state it explicitly{{#unless omitNonInteractiveHints}} instead of asking a follow-up question{{/unless}}.
-6. Keep repository edits restricted to repositories explicitly selected with write access, and vault edits restricted to vaults listed with `write` access.
-7. Treat read-only repositories, read-only vaults, and project references as supporting context.
-8. Reply in the user's input language by default; for mixed-language input, follow the last explicit language instruction.
-9. If no writable repository is selected, do read-only analysis only and provide actionable follow-up edit suggestions.
-10. When you make assumptions, record each one under `## Assumptions (if any)` using the nested `**Assumption:**` / `**Reason:**` / `**Impact:**` shape from the output format below.
+1. Keep repository edits restricted to repositories explicitly selected with write access, and vault edits restricted to vaults listed with `write` access.
+2. Treat read-only repositories, read-only vaults, and project references as supporting context.
+3. Reply in the user's input language by default; for mixed-language input, follow the last explicit language instruction.
+4. If no writable repository is selected, do read-only analysis only and provide actionable follow-up edit suggestions.
 
 ## Output format
 - Return output in this exact order, using these level-2 headings: `## Conclusion`, `## Assumptions (if any)`, `## Next step`.
