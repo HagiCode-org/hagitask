@@ -212,7 +212,7 @@ layout described above and must keep their JSON resources aligned with
 `schemas/task-preset-plugin/`. Validate authored files against those schemas before submitting:
 
 ```bash
-npm run validate
+pnpm run validate
 ```
 
 The validator checks every shipped preset, all manifest resource references, package

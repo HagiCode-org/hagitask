@@ -18,12 +18,12 @@ Inherits the monorepo rules from `/AGENTS.md`. This repository is the source of 
 Run from `repos/hagitask/`:
 
 ```bash
-npm install
-npm run validate
-npm test
+pnpm install
+pnpm run validate
+pnpm test
 ```
 
-Node.js 24+ is required. `npx hagitask validate .` / `hagitask new <name>` are the CLI entry points; `npm run validate` builds first and validates this repository. `npm-publish.yml` publishes dev/release npm versions after `npm test`; `dist/` is build output.
+Node.js 24+ is required. `npx hagitask validate .` / `hagitask new <name>` are the CLI entry points; `pnpm run validate` builds first and validates this repository. `npm-publish.yml` publishes dev/release npm versions after `pnpm test`; `dist/` is build output.
 
 Validate authored package files against the matching schema. Keep `$schema` references intact and run the relevant tests after schema or package changes.
 
@@ -38,3 +38,10 @@ Validate authored package files against the matching schema. Keep `$schema` refe
 ## Deployment and Integration
 
 The site consumes community packages from a pinned commit and publishes catalogs, details, schemas, and archives. Schema changes can affect `hagitask-community-packages`, `hagitask-contrib`, `hagitask-site`, `hagicode-core`, and `web`; check those consumers before changing a contract. Until the preset loading cutover is complete, keep the backend runtime copy synchronized when a shipped preset changes.
+
+## Package management
+
+- The repository uses pnpm, pinned in `package.json` `packageManager`. Run `corepack enable` once, then `pnpm install`. `pnpm-lock.yaml` is the only lockfile; do not commit `package-lock.json`.
+- Settings live in `pnpm-workspace.yaml`. `allowBuilds` lists the dependencies whose install scripts may run (reviewed individually, `false` means reviewed and denied); review any new dependency that has an install script and add it there.
+- A local registry mirror belongs in `~/.npmrc` only. Never commit a `registry=` line or a mirror URL; `pnpm run check:registry` (also run in CI) fails on any non-`registry.npmjs.org` `tarball` in the lockfile and on mirror hosts in tracked files.
+- Undeclared imports fail under pnpm's strict layout: declare the package instead of hoisting it.
