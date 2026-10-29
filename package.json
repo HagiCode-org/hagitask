@@ -54,9 +54,11 @@
   },
   "scripts": {
     "build": "export NODE_OPTIONS=\"${NODE_OPTIONS:-} --max-old-space-size=4096\"; tsc -p tsconfig.json",
-    "test": "npm run build && node --test test/*.test.mjs",
-    "validate": "npm run build && node dist/cli.js validate .",
-    "clean": "rm -rf dist"
+    "test": "pnpm run build && node --test test/*.test.mjs",
+    "validate": "pnpm run build && node dist/cli.js validate .",
+    "clean": "rm -rf dist",
+    "check:registry": "node scripts/check-registry-neutrality.mjs",
+    "test:registry": "node --test scripts/check-registry-neutrality.node-test.mjs"
   },
   "dependencies": {
     "ajv": "^8.17.1",
@@ -65,5 +67,6 @@
   "devDependencies": {
     "@types/node": "^24.5.2",
     "typescript": "^6.0.3"
-  }
+  },
+  "packageManager": "pnpm@12.16.1"
 }
