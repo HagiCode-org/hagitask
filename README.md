@@ -218,6 +218,11 @@ pnpm run validate
 The validator checks every shipped preset, all manifest resource references, package
 JSON schemas, prompt template references, and compatibility binding aliases.
 
+Every preset panel must declare a project selector: a field with `renderer: "project-picker"`
+(conventionally `id: "projectId"`, `required: true`, `output: "projectId"`) in one of its sections.
+The selector is UI-only: it needs no `inputBindings` entry, prompt parameter or template
+change. `validate` reports a panel with no selector; `hagitask new` scaffolds one.
+
 For the user-facing walkthrough covering package creation, locale and store-page resources,
 validation, semantic versioning, and Pull Requests, see the
 [HagiTask community guide](https://docs.hagicode.com/guides/hagitask/community/). A community
