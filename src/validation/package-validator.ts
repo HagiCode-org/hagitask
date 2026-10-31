@@ -293,6 +293,20 @@ function validateContract(pkg: DiscoveredPackage, manifest: JsonObject, loader: 
     errors.push(...validatePath(pkg, 'manifest.json', `localization.bundles.${locale}`, reference).errors);
   }
 
+  const panelRef = manifest.ui?.panel;
+  if (typeof panelRef === 'string' && panelRef.length > 0) {
+    const panelPath = resolve(pkg.dir, panelRef);
+    const panel = panelPath.startsWith(pkg.dir + sep) ? readJson(panelPath) : {};
+    if (!panel.error && panel.value && typeof panel.value === 'object') {
+      const sections: any[] = Array.isArray(panel.value.sections) ? panel.value.sections : [];
+      const hasSelector = sections.some((section) =>
+        Array.isArray(section?.fields) && section.fields.some((field: any) => field?.renderer === 'project-picker'));
+      if (!hasSelector) {
+        add('frontend/panel.json', 'sections', 'a project selector (renderer "project-picker") is required');
+      }
+    }
+  }
+
   const taskPresetRef = manifest.backend?.taskPreset;
   if (typeof taskPresetRef !== 'string') return errors;
   const taskPresetPath = resolve(pkg.dir, taskPresetRef);

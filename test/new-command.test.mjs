@@ -63,7 +63,16 @@ test('new output validates as a package and contains command extensions', () => 
     assert.equal(validation.valid, true, validation.errors.map((error) => error.message).join('\n'));
     const commands = JSON.parse(readFileSync(join(packagePath, 'frontend/commands.json'), 'utf8'));
     assert.deepEqual(commands.commands.map((command) => command.id), ['what-is-this', 'what-is-next']);
-    assert.equal(JSON.parse(readFileSync(join(packagePath, 'frontend/panel.json'), 'utf8')).sections[0].fields[0].output, 'targetRepositories');
+    const fields = JSON.parse(readFileSync(join(packagePath, 'frontend/panel.json'), 'utf8')).sections[0].fields;
+    assert.equal(fields[0].renderer, 'project-picker');
+    assert.equal(fields[0].output, 'projectId');
+    assert.equal(fields[0].required, true);
+    assert.equal(fields[1].output, 'targetRepositories');
+    const locales = ['en-US', 'zh-CN'].map((locale) => JSON.parse(readFileSync(join(packagePath, `locales/${locale}.json`), 'utf8')));
+    for (const bundle of locales) {
+      assert.equal(typeof bundle.panel.projectLabel, 'string');
+      assert.equal(typeof bundle.panel.projectHint, 'string');
+    }
     assert.equal(existsSync(join(packagePath, 'backend/templates/en-US/commands/what-is-this.md')), true);
     assert.equal(existsSync(join(packagePath, 'backend/templates/zh-CN/commands/what-is-next.md')), true);
   } finally {

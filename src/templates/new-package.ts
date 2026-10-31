@@ -71,6 +71,13 @@ export function createNewPackageFiles(context: NewPackageTemplateContext): NewPa
           id: 'context',
           layout: 'stack',
           fields: [{
+            id: 'projectId',
+            renderer: 'project-picker',
+            label: localized('panel.projectLabel'),
+            hint: localized('panel.projectHint'),
+            required: true,
+            output: 'projectId',
+          }, {
             id: 'targetRepositories',
             renderer: 'repository-access-selector',
             label: localized('panel.repositoryLabel'),
@@ -217,6 +224,8 @@ export function createNewPackageFiles(context: NewPackageTemplateContext): NewPa
           submitting: 'Running analysis...',
         },
         panel: {
+          projectLabel: 'Project *',
+          projectHint: 'The task will be created in the selected project.',
           repositoryLabel: 'Repositories',
           repositoryHint: 'Select one or more repositories. Analysis never chooses an implicit target.',
           repositoryEmpty: 'Select a repository before running an analysis.',
@@ -243,6 +252,8 @@ export function createNewPackageFiles(context: NewPackageTemplateContext): NewPa
           submitting: '正在运行分析……',
         },
         panel: {
+          projectLabel: '项目 *',
+          projectHint: '任务会在所选项目中创建。',
           repositoryLabel: '仓库',
           repositoryHint: '选择一个或多个仓库。分析不会隐式选择目标。',
           repositoryEmpty: '运行分析前请先选择仓库。',
