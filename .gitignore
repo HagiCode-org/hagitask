@@ -3,3 +3,5 @@ node_modules/
 dist/
 .test-fixture-*/
 .codegraph/
+# Local deja session-rule export (auto-extracted from agent sessions; not committed)
+.deja/
