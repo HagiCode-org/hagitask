@@ -188,6 +188,20 @@ A package that wants to state the scope declares both in `backend/prompts.json`:
 - **The backend supplies the values.** They are not creation parameters: package panels,
   `inputBindings` and create requests must not declare or send them.
 
+## Scope Declarations
+
+The runtime provides three scopes to every preset task: repositories, vaults and other
+projects. A package does not have to declare them. A package with no `targets` section
+validates, and the catalog adds the missing scope fields and target selections, so the
+creation schema lists all three scopes for every task.
+
+A declaration only refines a scope the runtime already provides. Under
+`targets.repositories`, a package can set `selections` with `required`, `allowedAccessTypes`,
+`mutuallyExclusiveWith`, labels and order. A bucket that lists `selections` must also set
+`enabled`. `enabled: false` does not remove the scope; a legacy package that declares
+`enabled: false` buckets still loads. The creation schema reports the scope and its request
+key; `validate` reports an unsupported `scope.source` with the package, file and selection id.
+
 ## Preset Package Directory
 
 `presets/` is the root for preset-task packages. Each package lives in its own
