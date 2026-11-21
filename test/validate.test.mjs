@@ -88,3 +88,83 @@ test('a package without a panel file reports no project selector error', () => {
     rmSync(fixture, { recursive: true, force: true });
   }
 });
+
+function withFixturePackage(mutate) {
+  const fixture = mkdtempSync(join(root, '.test-fixture-'));
+  const packagePath = join(fixture, 'presets', 'normal-session');
+  cpSync(join(root, 'presets', 'normal-session'), packagePath, { recursive: true });
+  const taskPresetPath = join(packagePath, 'backend', 'task-preset.json');
+  const taskPreset = JSON.parse(readFileSync(taskPresetPath, 'utf8'));
+  mutate(taskPreset);
+  writeFileSync(taskPresetPath, JSON.stringify(taskPreset));
+  return { fixture, packagePath };
+}
+
+test('a package with no targets section validates', () => {
+  const { fixture, packagePath } = withFixturePackage((taskPreset) => {
+    delete taskPreset.targets;
+  });
+  try {
+    const result = validatePackages(packagePath);
+    assert.equal(result.valid, true, result.errors.map((error) => error.message).join('\n'));
+  } finally {
+    rmSync(fixture, { recursive: true, force: true });
+  }
+});
+
+test('a package that declares only the repositories bucket validates', () => {
+  const { fixture, packagePath } = withFixturePackage((taskPreset) => {
+    taskPreset.targets = { repositories: taskPreset.targets.repositories };
+  });
+  try {
+    const result = validatePackages(packagePath);
+    assert.equal(result.valid, true, result.errors.map((error) => error.message).join('\n'));
+  } finally {
+    rmSync(fixture, { recursive: true, force: true });
+  }
+});
+
+test('a legacy package with enabled false buckets validates unchanged', () => {
+  const { fixture, packagePath } = withFixturePackage((taskPreset) => {
+    taskPreset.targets.vaults = { enabled: false };
+    taskPreset.targets.projects = { enabled: false };
+  });
+  try {
+    const result = validatePackages(packagePath);
+    assert.equal(result.valid, true, result.errors.map((error) => error.message).join('\n'));
+  } finally {
+    rmSync(fixture, { recursive: true, force: true });
+  }
+});
+
+test('a bucket that declares selections without enabled is still rejected', () => {
+  const { fixture, packagePath } = withFixturePackage((taskPreset) => {
+    taskPreset.targets.vaults = { selections: taskPreset.targets.repositories.selections };
+  });
+  try {
+    const result = validatePackages(packagePath);
+    assert.equal(result.valid, false);
+    assert.ok(result.errors.some((error) => /enabled/.test(error.message)), result.errors.map((error) => error.message).join('\n'));
+  } finally {
+    rmSync(fixture, { recursive: true, force: true });
+  }
+});
+
+test('an unsupported scope source is reported with its package, file and selection id', () => {
+  let selectionId;
+  const { fixture, packagePath } = withFixturePackage((taskPreset) => {
+    selectionId = taskPreset.targets.repositories.selections[0].id;
+    taskPreset.targets.repositories.selections[0].scope = { source: 'remote-registry' };
+  });
+  try {
+    const result = validatePackages(packagePath);
+    assert.equal(result.valid, false);
+    const scopeError = result.errors.find((error) => /unsupported scope source/.test(error.message));
+    assert.ok(scopeError, result.errors.map((error) => error.message).join('\n'));
+    assert.match(scopeError.packageId, /normal-session/);
+    assert.match(scopeError.file, /normal-session\/(\.\/)?backend\/task-preset\.json$/);
+    assert.ok(scopeError.message.includes(`'${selectionId}'`), scopeError.message);
+  } finally {
+    rmSync(fixture, { recursive: true, force: true });
+  }
+});

@@ -27,17 +27,6 @@
       "name": "any"
     }
   ],
-  "targets": {
-    "repositories": {
-      "enabled": false
-    },
-    "vaults": {
-      "enabled": false
-    },
-    "projects": {
-      "enabled": false
-    }
-  },
   "inputBindings": [
     {
       "input": "researchDirection",
