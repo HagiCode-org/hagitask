@@ -30,8 +30,23 @@
 
 {{#if targetProjects}}
 ### 项目引用
+仅修改标记为 `write` 的仓库；其余仓库只作为参考上下文。访问模式用于指导本次任务。
 {{#each targetProjects}}
-- `{{name}}` 路径：`{{physicalPath}}`（权限：`{{accessType}}`）
+
+- 项目 `{{name}}` 路径：`{{physicalPath}}`（权限：`{{accessType}}`）
+{{#if isWholeProject}}
+  - 整个项目：涵盖该项目的全部仓库，权限为 `{{accessType}}`。
+{{/if}}
+{{#if isSelectAll}}
+{{#if repositoryScopeFallback}}
+  - 涵盖该项目的全部仓库，权限为 `{{selectAllAccess}}`；以下列表是保存时的快照，因为未能获取该项目当前的仓库列表。
+{{else}}
+  - 涵盖该项目的全部仓库，权限为 `{{selectAllAccess}}`，以下为本次运行时解析出的仓库：
+{{/if}}
+{{/if}}
+{{#each repositories}}
+  - 仓库 `{{path}}`（`{{displayName}}`，权限：`{{accessType}}`）
+{{/each}}
 {{/each}}
 {{/if}}
 

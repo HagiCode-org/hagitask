@@ -30,8 +30,23 @@ Start a normal chat session using the provided scope and user input below.
 
 {{#if targetProjects}}
 ### Project references
+Modify only `write` repositories; treat the others as reference context. The access levels guide this task.
 {{#each targetProjects}}
-- `{{name}}` at `{{physicalPath}}` (access: `{{accessType}}`)
+
+- Project `{{name}}` at `{{physicalPath}}` (access: `{{accessType}}`)
+{{#if isWholeProject}}
+  - Whole project: covers all repositories of this project at access `{{accessType}}`.
+{{/if}}
+{{#if isSelectAll}}
+{{#if repositoryScopeFallback}}
+  - Covers all repositories of this project at access `{{selectAllAccess}}`; the list below is the saved snapshot because the current repository list could not be resolved.
+{{else}}
+  - Covers all repositories of this project at access `{{selectAllAccess}}`, resolved for this run:
+{{/if}}
+{{/if}}
+{{#each repositories}}
+  - Repository `{{path}}` (`{{displayName}}`, access: `{{accessType}}`)
+{{/each}}
 {{/each}}
 {{/if}}
 
